@@ -31,7 +31,7 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
       appBar: AppBar(
         // title: Text("Bottom Navigation Bar"),
       ),
-      body: _screens[_currentIndex],
+      body: _screens[_currentIndex],//! cái này bỏ vô phần screen 
       drawer: MyDrawer(), // Add the drawer here
       bottomNavigationBar: CurvedNavigationBar(
         
