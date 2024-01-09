@@ -80,15 +80,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       Container(
                           child: Padding(
-                            padding: EdgeInsets.all(0.5),
+                            padding: EdgeInsets.all(5),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   width: 320,
-                                  padding: EdgeInsets.all(0.5),
-                                  child: const Text('Là một sản phẩm thời trang đang được yêu thích bởi giới trẻ hiện nay.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 17,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
+                                  child: const Text('Là một sản phẩm thời trang đang được yêu thích bởi giới trẻ hiện nay.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 15,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
                                 ),
                               ],
                             ),
@@ -184,7 +183,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         const SizedBox(height: 5),
                         Container(
-                          width: 255,
+                          width: 257,
                           child: Padding(
                             padding: EdgeInsets.all(0.1),
                             child: Row(
@@ -246,14 +245,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Container(
                           child: Padding(
-                            padding: EdgeInsets.all(0.5),
+                            padding: EdgeInsets.all(5),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   width: 320,
-                                  padding: EdgeInsets.all(0.5),
                                   child: const Text('Chúng tôi cam kết hàng đúng như mô tả có thể trả hàng trong vòng 7 ngày.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 15,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
                                 ),
                               ],
