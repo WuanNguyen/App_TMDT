@@ -53,20 +53,20 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
             ListTile(
-              title: Text('Home Page'),
+              title: const Text('Home Page'),
               onTap: () {
                 Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
               );
               },
             ),
             ListTile(
-              title: Text('Card Page'),
+              title: const Text('Card Page'),
               onTap: () {
                 Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
+                MaterialPageRoute(builder: (context) => const CartScreen()),
               );
               },
             ),
@@ -77,7 +77,7 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {
                 Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
               );
             },
             leading: const Icon(Icons.logout),

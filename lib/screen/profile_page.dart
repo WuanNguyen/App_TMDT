@@ -11,10 +11,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:Color(0xFFD2EDE0),
+      color:const Color(0xFFD2EDE0),
       child: ListView(
       
-      children: [Text("Profile Page")],
+      children: const [Text("Profile Page")],
     ),
     );
   }

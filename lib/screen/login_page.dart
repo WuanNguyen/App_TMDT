@@ -1,6 +1,8 @@
 // màng hình đăng nhập
 
 import 'package:doan_tmdt/model/bottom_appar.dart';
+import 'package:doan_tmdt/screen/forgot_password.dart';
+import 'package:doan_tmdt/screen/register_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,8 +15,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController username =  TextEditingController();
   final TextEditingController password = TextEditingController();
-  String Username_thongbao = "";
-  String Password_thongbao = "";
+  String TBUsername = "";
+  String TBPassword = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +33,11 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(padding: EdgeInsets.all(25)),
+              const Padding(padding: EdgeInsets.all(32)),
               Container(
                 child: Image.asset("assets/img/small_logo.png",height: 150,width: MediaQuery.of(context).size.width,),
               ),
-              const Text("Đăng Nhập",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.w500),),
+              const Text("Đăng Nhập",style: TextStyle(fontSize: 35,color: Color.fromRGBO(210, 237, 224, 1),fontWeight: FontWeight.w500),),
 
               // * Vùng nhập liệu (Username + Password)
               const Padding(padding: EdgeInsets.all(20)),
@@ -52,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
-                        Text(Username_thongbao,style: TextStyle(color: Colors.red),)
+                        Text(TBUsername,style: const TextStyle(color: Colors.red),)
                       ],
                     ),
                   ],
@@ -72,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
-                        Text(Password_thongbao,style: TextStyle(color: Colors.red),)
+                        Text(TBPassword,style: const TextStyle(color: Colors.red),)
                       ],
                     ),
                   ],
@@ -81,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // * Vùng nút bấm (Đăng nhập + Đăng ký)
               // Nút đăng nhập
-              Padding(padding: EdgeInsets.all(10)),
+              const Padding(padding: EdgeInsets.all(10)),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -90,12 +92,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: (){
                       if(username.text.isEmpty){
                         setState(() {  
-                        Username_thongbao = "Tài khoản không đúng";
+                        TBUsername = "Vui lòng nhập tài khoản";
+                        });
+                      }
+                      else {
+                        setState(() {  
+                        TBUsername = "";
                         });
                       }
                       if(password.text.isEmpty){
                         setState(() {
-                          Password_thongbao = "Mật khẩu không đúng";
+                          TBPassword = "Vui lòng nhập mật khẩu";
+                        });
+                      }
+                      else {
+                        setState(() {  
+                        TBPassword = "";
                         });
                       }
                       if(username.text=="Huan"&& password.text=="123"){
@@ -103,22 +115,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Color.fromRGBO(120, 120, 120, 1)),
+                      backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(120, 120, 120, 1)),
                     ),
-                    child: Text("Đăng nhập",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white),),
+                    child: const Text("Đăng nhập",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white),),
                   ),
                   //Nút đăng ký
                   GestureDetector(
-                    onTap: () {},
-                    child: Text("Đăng ký",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),)
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                    },
+                    child: const Text("Đăng ký",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),)
                   )
                 ],
               ),
-              Padding(padding: EdgeInsets.all(5)),
+              const Padding(padding: EdgeInsets.all(5)),
               //quên mật khẩu
               GestureDetector(
-                onTap: (){},
-                child: Text("Quên mật khẩu?",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const ForgotPassword()));
+                },
+                child: const Text("Quên mật khẩu?",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),),
               )
             ]       
           ),
