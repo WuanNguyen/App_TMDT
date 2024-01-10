@@ -261,7 +261,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(height: 10),
                         Container(
                           width: 370,
-                          child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
                           child: Center(
                             child: ElevatedButton(
@@ -284,7 +283,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 ),
                               ),
                             ),
-                          )),
+                          )
                           ),
                     ],
                   )
