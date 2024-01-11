@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -8,14 +9,27 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  bool isButtonPressed = false;
+  bool isButtonPressed40 = false;
+  bool isButtonPressed41 = false;
+  bool isButtonPressed42 = false;
+  bool isButtonPressed43 = false;
+  bool iconTraiTim = false;
+  bool btnDo = true;
+  bool btnXanh = false;
+  bool btnVang = false;
+  bool btnLuc = false;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Container(
-      color:Color(0xFFD2EDE0),
+      width: width,
+      //color:Color(0xFFD2EDE0),
+      color: Colors.white,
       child: ListView(
         children: [
           Container(
-            width: 393,
+            width: 400,
             height: 300,
             decoration: const ShapeDecoration(
               color: Colors.grey,
@@ -55,8 +69,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Text('1.500.000 VND',style: TextStyle(color: Colors.white,fontSize: 25,decoration: TextDecoration.none)),
                       Spacer(),
                       IconButton(
-                          onPressed: (){},
-                          icon: Icon(Icons.favorite),
+                          onPressed: (){
+                            setState(() {
+                              iconTraiTim = !iconTraiTim;
+                            });
+                          },
+                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(iconTraiTim ? Colors.transparent:Colors.transparent),),
+                          icon: Icon(iconTraiTim ? Icons.favorite : Icons.favorite_border ),
                         ),
                     ],
                   ),
@@ -64,7 +83,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 10),
           Container(
             width: MediaQuery.of(context).size.width,
             child: Padding(
@@ -74,20 +92,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 10),
                       const Padding(
                         padding: EdgeInsets.all(5),
                         child: Text("Mô tả",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20,decoration: TextDecoration.none),),
                       ),
                       Container(
                           child: Padding(
-                            padding: EdgeInsets.all(5),
+                            padding: EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  width: 320,
-                                  child: const Text('Là một sản phẩm thời trang đang được yêu thích bởi giới trẻ hiện nay.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 15,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
+                                  width: 330,
+                                  child: const AutoSizeText('Là một sản phẩm thời trang đang được yêu thích bởi giới trẻ hiện nay.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 17,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
                                 ),
                               ],
                             ),
@@ -110,72 +129,74 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: (){},
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Container(
                                       width: 90,
                                       padding: EdgeInsets.all(0.1),
-                                      color: Colors.transparent,
                                       child: ElevatedButton(
-                                      onPressed: (){},
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: const Size(90, 50),
-                                        backgroundColor: Colors.transparent,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                        ),
+                                      onPressed: (){
+                                        setState(() {
+                                          isButtonPressed = !isButtonPressed;
+                                          isButtonPressed40 = false;
+                                          isButtonPressed41 = false;
+                                          isButtonPressed42 = false;
+                                          isButtonPressed43 = false;
+                                        });
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(isButtonPressed ? Color.fromARGB(255, 20, 111, 29):Colors.transparent),
                                       ),
-                                      child: Text("39",style: TextStyle(color: Colors.black))
+                                      child: Text(isButtonPressed ? '39' : '39',style: TextStyle(color: Colors.black))
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: (){},
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Container(
                                       width: 90,
                                       padding: EdgeInsets.all(0.1),
                                       child: ElevatedButton(
-                                      onPressed: (){},
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: const Size(90, 50),
-                                        backgroundColor: Colors.transparent,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                        ),
+                                      onPressed: (){
+                                        setState(() {
+                                          isButtonPressed = false;
+                                          isButtonPressed40 = !isButtonPressed40;
+                                          isButtonPressed41 = false;
+                                          isButtonPressed42 = false;
+                                          isButtonPressed43 = false;
+                                        });
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(isButtonPressed40 ? Color.fromARGB(255, 20, 111, 29):Colors.transparent),
                                       ),
-                                      child: Text("40",style: TextStyle(color: Colors.black))
+                                      child: Text(isButtonPressed40 ? '40' : '40',style: TextStyle(color: Colors.black))
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: (){},
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Container(
                                       width: 90,
                                       padding: EdgeInsets.all(0.1),
                                       child: ElevatedButton(
-                                      onPressed: (){},
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: const Size(90, 50),
-                                        backgroundColor: Colors.transparent,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                        ),
+                                      onPressed: (){
+                                        setState(() {
+                                          isButtonPressed = false;
+                                          isButtonPressed40 = false;
+                                          isButtonPressed41 = !isButtonPressed41;
+                                          isButtonPressed42 = false;
+                                          isButtonPressed43 = false;
+                                        });
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(isButtonPressed41 ? Color.fromARGB(255, 20, 111, 29):Colors.transparent),
                                       ),
-                                      child: Text("41",style: TextStyle(color: Colors.black))
+                                      child: Text(isButtonPressed41 ? '41' : '41',style: TextStyle(color: Colors.black))
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -190,49 +211,177 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: (){},
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Container(
                                       width: 90,
                                       padding: EdgeInsets.all(0.1),
                                       child: ElevatedButton(
-                                      onPressed: (){},
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: const Size(90, 50),
-                                        backgroundColor: Colors.transparent,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                        ),
+                                      onPressed: (){
+                                        setState(() {
+                                          isButtonPressed = false;
+                                          isButtonPressed40 = false;
+                                          isButtonPressed41 = false;
+                                          isButtonPressed42 = !isButtonPressed42;
+                                          isButtonPressed43 = false;
+                                        });
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(isButtonPressed42 ? Color.fromARGB(255, 20, 111, 29):Colors.transparent),
                                       ),
-                                      child: Text("42",style: TextStyle(color: Colors.black))
+                                      child: Text(isButtonPressed42 ? '42' : '42',style: TextStyle(color: Colors.black))
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Center(
-                                  child: GestureDetector(
-                                    onTap: (){},
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Container(
                                       width: 90,
                                       padding: EdgeInsets.all(0.1),
                                       child: ElevatedButton(
-                                      onPressed: (){},
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: const Size(90, 50),
-                                        backgroundColor: Colors.transparent,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                        ),
+                                      onPressed: (){
+                                        setState(() {
+                                          isButtonPressed43 = !isButtonPressed43;
+                                          isButtonPressed = false;
+                                          isButtonPressed40 = false;
+                                          isButtonPressed41 = false;
+                                          isButtonPressed42 = false;
+                                        });
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(isButtonPressed43 ? Color.fromARGB(255, 20, 111, 29):Colors.transparent),
                                       ),
-                                      child: Text("43",style: TextStyle(color: Colors.black))
+                                      child: Text(isButtonPressed43 ? '43' : '43',style: TextStyle(color: Colors.black))
                                       ),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      const SizedBox(height: 10),
+                      const Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text("Các loại màu",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20,decoration: TextDecoration.none),),
+                      ),
+                      Container(
+                          width: 370,
+                          child: Padding(
+                            padding: EdgeInsets.all(0.1),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      padding: EdgeInsets.all(0.1),
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.circular(15.0),
+                                        border: Border.all(
+                                          width: 3.0,
+                                          color: btnDo ? Colors.black:Colors.transparent,
+                                        ),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            btnDo = !btnDo;
+                                            btnLuc = false;
+                                            btnVang = false;
+                                            btnXanh = false;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      padding: EdgeInsets.all(0.1),
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(15.0),
+                                        border: Border.all(
+                                          width: 3.0,
+                                          color: btnXanh ? Colors.black:Colors.transparent,
+                                        ),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            btnDo = false;
+                                            btnLuc = false;
+                                            btnVang = false;
+                                            btnXanh = !btnXanh;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      padding: EdgeInsets.all(0.1),
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow,
+                                        borderRadius: BorderRadius.circular(15.0),
+                                        border: Border.all(
+                                          width: 3.0,
+                                          color: btnVang ? Colors.black:Colors.transparent,
+                                        ),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            btnDo = false;
+                                            btnLuc = false;
+                                            btnVang = !btnVang;
+                                            btnXanh = false;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      padding: EdgeInsets.all(0.1),
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(15.0),
+                                        border: Border.all(
+                                          width: 3.0,
+                                          color: btnLuc ? Colors.black:Colors.transparent,
+                                        ),
+                                      ),
+                                      
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            btnDo = false;
+                                            btnLuc = !btnLuc;
+                                            btnVang = false;
+                                            btnXanh = false;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ]
                                 ),
                               ],
                             ),
@@ -245,20 +394,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Container(
                           child: Padding(
-                            padding: EdgeInsets.all(5),
-                            child: Row(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  width: 320,
-                                  child: const Text('Chúng tôi cam kết hàng đúng như mô tả có thể trả hàng trong vòng 7 ngày.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 15,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
+                                  width: 330,
+                                  child: const AutoSizeText('Chúng tôi cam kết hàng đúng như mô tả có thể trả hàng trong vòng 7 ngày.',softWrap: true,style: TextStyle(color: Colors.black,fontSize: 17,decoration: TextDecoration.none,fontWeight: FontWeight.normal),),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 20),
                         Container(
                           width: 370,
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -266,7 +415,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             child: ElevatedButton(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(200, 50),
+                                minimumSize: const Size(400, 50),
                                 backgroundColor: Color.fromARGB(255, 20, 111, 29),
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
