@@ -9,8 +9,10 @@ class SaleProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: (){
       //todo: chức năng nút
-      onTap: (){},
+
+      },
       //* thông tin sale
       child: Container(
         height: 77,

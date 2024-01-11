@@ -35,8 +35,8 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
         color: const Color.fromARGB(255, 28, 80, 29),
         buttonBackgroundColor: Colors.white,
         backgroundColor: const Color(0xFFD2EDE0),
-        animationDuration: const Duration(seconds: 1),
-        animationCurve: Curves.bounceOut,
+        animationDuration: const Duration(milliseconds: 500),
+        animationCurve: Curves.decelerate,
 
         items: const <Widget>[
           Icon(Icons.home,color: Color.fromARGB(255, 193, 204, 69),),

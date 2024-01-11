@@ -18,6 +18,7 @@ class Product extends StatelessWidget {
       child: Container(
         width: 168,
         height: 268,
+        margin: EdgeInsets.fromLTRB(14, 28, 14, 0),
         decoration: ShapeDecoration(
           color: Color.fromRGBO(46, 91, 69, 1),
           shape: RoundedRectangleBorder(
@@ -74,9 +75,10 @@ class Product extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(Icons.add,color: Color.fromRGBO(46, 91, 69, 1)),
-                    Text("Thêm vào giỏ",style: TextStyle(color: Color.fromRGBO(46, 91, 69, 1),fontWeight: FontWeight.bold),)
+                    Text("Thêm vào giỏ",style: TextStyle(color: Color.fromRGBO(46, 91, 69, 1),fontWeight: FontWeight.bold),),
                   ],
                 ),
+                
               )
             ),
             

@@ -12,17 +12,20 @@ class _SaleProductListState extends State<SaleProductList> {
   List<String> imgList = List.filled(5, 'assets/img/user.png',growable: true);
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Container(
+      height: 84,
+      width: MediaQuery.of(context).size.width - 10,
+      child: ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: imgList.length,
       itemBuilder: (context,index){
         return Row(
           children: [
-            Padding(padding: EdgeInsets.fromLTRB(15, 0, 0, 0)),
             SaleProduct(img: imgList[index]),
           ],
         );
       }
-    );
+      ) ,
+    ) ;
   }
 }//!load list sale item

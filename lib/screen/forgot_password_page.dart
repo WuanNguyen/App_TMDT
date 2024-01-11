@@ -14,9 +14,9 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  final TextEditingController username =  TextEditingController();
+  final TextEditingController email =  TextEditingController();
   final TextEditingController otp = TextEditingController();
-  String TBUsername = "";
+  String TBEmail = "";
   String TBOTP = "Gửi mã";
   bool isOTPSender = false;
   @override
@@ -39,7 +39,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Container(
                 child: Image.asset("assets/img/small_logo.png",height: 150,width: MediaQuery.of(context).size.width,),
               ),
-              const Text("Đăng Nhập",style: TextStyle(fontSize: 35,color: Color.fromRGBO(210, 237, 224, 1),fontWeight: FontWeight.w500),),
+              const Text("Quên mật khẩu",style: TextStyle(fontSize: 35,color: Color.fromRGBO(210, 237, 224, 1),fontWeight: FontWeight.w500),),
 
               // * Vùng nhập liệu (Username + otp)
               const Padding(padding: EdgeInsets.all(20)),
@@ -55,13 +55,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       child: Column(
                         children: [
                           TextField(
-                            controller: username,
-                            decoration: const InputDecoration(label: Text("Tài khoản",style:TextStyle(fontWeight: FontWeight.w500))),
+                            controller: email,
+                            decoration: const InputDecoration(label: Text("Email",style:TextStyle(fontWeight: FontWeight.w500))),
                           ),
                           Row(
                             children: [
                               const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
-                              Text(TBUsername,style: const TextStyle(color: Colors.red),)
+                              Text(TBEmail,style: const TextStyle(color: Colors.red),)
                             ],
                           ),
                         ],
@@ -88,12 +88,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         GestureDetector(
                           onTap: (){
                             setState(() {
-                              if(username.text.isEmpty){
-                                TBUsername = "Vui lòng nhập tài khoản";
+                              if(email.text.isEmpty){
+                                TBEmail = "Vui lòng nhập Email";
                               }
                               else{
                                 isOTPSender = true;
-                                TBUsername ="";
+                                TBEmail ="";
                               }
                               if(isOTPSender){
                                 Timer.periodic(const Duration(seconds: 59),(timer){

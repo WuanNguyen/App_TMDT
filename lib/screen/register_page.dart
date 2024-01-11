@@ -11,10 +11,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController username =  TextEditingController();
+  final TextEditingController email =  TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController cpassword = TextEditingController();
-  String TBUsername = "";
+  String TBEmail = "";
   String TBPassword = "";
   String TBCPassword = "";
   @override
@@ -48,13 +48,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextField(
-                      controller: username,
-                      decoration: const InputDecoration(label: Text("Tài khoản",style:TextStyle(fontWeight: FontWeight.w500))),
+                      controller: email,
+                      decoration: const InputDecoration(label: Text("Email",style:TextStyle(fontWeight: FontWeight.w500))),
                     ),
                     Row(
                       children: [
                         const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
-                        Text(TBUsername,style: const TextStyle(color: Colors.red),)
+                        Text(TBEmail,style: const TextStyle(color: Colors.red),)
                       ],
                     ),
                   ],
@@ -110,14 +110,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   FilledButton(
                     onPressed: (){
-                      if(username.text.isEmpty){
+                      if(email.text.isEmpty){
                         setState(() {  
-                        TBUsername = "Vui lòng nhập tài khoản";
+                        TBEmail = "Vui lòng nhập Email";
                         });
                       }
                       else {
                         setState(() {  
-                        TBUsername = "";
+                        TBEmail = "";
                         });
                       }
                       if(password.text.isEmpty){
@@ -140,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         TBCPassword = "";
                         });
                       }
-                      if(username.text=="Huan" && password.text=="123" && cpassword.text == password.text){
+                      if(email.text=="Huan" && password.text=="123" && cpassword.text == password.text){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
                       }
                     },

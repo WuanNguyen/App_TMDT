@@ -1,7 +1,7 @@
 // màng hình đăng nhập
 
 import 'package:doan_tmdt/model/bottom_appar.dart';
-import 'package:doan_tmdt/screen/forgot_password.dart';
+import 'package:doan_tmdt/screen/forgot_password_page.dart';
 import 'package:doan_tmdt/screen/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController username =  TextEditingController();
+  final TextEditingController email =  TextEditingController();
   final TextEditingController password = TextEditingController();
-  String TBUsername = "";
+  String TBEmail = "";
   String TBPassword = "";
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextField(
-                      controller: username,
-                      decoration: const InputDecoration(label: Text("Tài khoản",style:TextStyle(fontWeight: FontWeight.w500))),
+                      controller: email,
+                      decoration: const InputDecoration(label: Text("Email",style:TextStyle(fontWeight: FontWeight.w500))),
                     ),
                     Row(
                       children: [
                         const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
-                        Text(TBUsername,style: const TextStyle(color: Colors.red),)
+                        Text(TBEmail,style: const TextStyle(color: Colors.red),)
                       ],
                     ),
                   ],
@@ -90,14 +90,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   FilledButton(
                     onPressed: (){
-                      if(username.text.isEmpty){
+                      if(email.text.isEmpty){
                         setState(() {  
-                        TBUsername = "Vui lòng nhập tài khoản";
+                        TBEmail = "Vui lòng nhập Email";
                         });
                       }
                       else {
                         setState(() {  
-                        TBUsername = "";
+                        TBEmail = "";
                         });
                       }
                       if(password.text.isEmpty){
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TBPassword = "";
                         });
                       }
-                      if(username.text=="Huan"&& password.text=="123"){
+                      if(email.text=="Huan"&& password.text=="123"){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
                       }
                     },
