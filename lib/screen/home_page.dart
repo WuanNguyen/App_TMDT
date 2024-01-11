@@ -1,3 +1,4 @@
+import 'package:doan_tmdt/model/drawer.dart';
 import 'package:doan_tmdt/model/product.dart';
 import 'package:doan_tmdt/model/product_list.dart';
 import 'package:doan_tmdt/model/sale_product.dart';
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
+      drawer: MyDrawer(),
       body: Container(
         color: const Color.fromRGBO(210, 237, 224, 1),
         child: SingleChildScrollView(

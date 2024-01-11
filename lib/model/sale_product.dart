@@ -17,9 +17,9 @@ class SaleProduct extends StatelessWidget {
       child: Container(
         height: 77,
         width: 222,
-        margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-        padding: EdgeInsets.all(13),
-        constraints: BoxConstraints(
+        margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+        padding: const EdgeInsets.all(13),
+        constraints: const BoxConstraints(
           maxHeight: 77,
           maxWidth: 222
         ),
@@ -37,7 +37,7 @@ class SaleProduct extends StatelessWidget {
               height: 50,
               width: 50,
               clipBehavior: Clip.antiAlias,
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxHeight: 50,
                 maxWidth: 50,
               ),

@@ -22,128 +22,130 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Image(
-            image: const AssetImage('assets/img/template.png'),
-            fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-          ),
-          Column(
-            //* vùng Logo
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(padding: EdgeInsets.all(32)),
-              Container(
-                child: Image.asset("assets/img/small_logo.png",height: 150,width: MediaQuery.of(context).size.width,),
-              ),
-              const Text("Quên mật khẩu",style: TextStyle(fontSize: 35,color: Color.fromRGBO(210, 237, 224, 1),fontWeight: FontWeight.w500),),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Image(
+              image: const AssetImage('assets/img/template.png'),
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+            ),
+            Column(
+              //* vùng Logo
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(padding: EdgeInsets.all(32)),
+                Container(
+                  child: Image.asset("assets/img/small_logo.png",height: 150,width: MediaQuery.of(context).size.width,),
+                ),
+                const Text("Quên mật khẩu",style: TextStyle(fontSize: 35,color: Color.fromRGBO(210, 237, 224, 1),fontWeight: FontWeight.w500),),
 
-              // * Vùng nhập liệu (Username + otp)
-              const Padding(padding: EdgeInsets.all(20)),
-              
-              // Username
-              Container(
-                padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width/7, 0, 0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width/1.4,
-                      child: Column(
-                        children: [
-                          TextField(
-                            controller: email,
-                            decoration: const InputDecoration(label: Text("Email",style:TextStyle(fontWeight: FontWeight.w500))),
-                          ),
-                          Row(
-                            children: [
-                              const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
-                              Text(TBEmail,style: const TextStyle(color: Colors.red),)
-                            ],
-                          ),
-                        ],
-                      )
-                    ),
-                    //otp
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width/2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextField(
-                                keyboardType: TextInputType.number,
-                                maxLength: 6,
-                                controller: otp,
-                                decoration: const InputDecoration(label: Text("Mã xác nhận",style:TextStyle(fontWeight: FontWeight.w500))),
-                              ),
-                            ],
-                          )
-                        ),
-                        Padding(padding: EdgeInsets.fromLTRB(22, 0, 0, 0)),
-                        GestureDetector(
-                          onTap: (){
-                            setState(() {
-                              if(email.text.isEmpty){
-                                TBEmail = "Vui lòng nhập Email";
-                              }
-                              else{
-                                isOTPSender = true;
-                                TBEmail ="";
-                              }
-                              if(isOTPSender){
-                                Timer.periodic(const Duration(seconds: 59),(timer){
-                                  TBOTP = "Chờ ${timer.tick} s";
-                                  if(timer.tick==0){
-                                    TBOTP = "Gửi lại";
-                                    isOTPSender = false;
-                                  }
-                                });
-                              }
-                            });
-                          },
-                          child: Text(TBOTP,style: TextStyle(color: Color.fromRGBO(14, 52, 201, 1),fontWeight: FontWeight.bold),),
+                // * Vùng nhập liệu (Username + otp)
+                const Padding(padding: EdgeInsets.all(20)),
+                
+                // Username
+                Container(
+                  padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width/7, 0, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width/1.4,
+                        child: Column(
+                          children: [
+                            TextField(
+                              controller: email,
+                              decoration: const InputDecoration(label: Text("Email",style:TextStyle(fontWeight: FontWeight.w500))),
+                            ),
+                            Row(
+                              children: [
+                                const Padding(padding: EdgeInsets.fromLTRB(5, 0, 0, 0)),
+                                Text(TBEmail,style: const TextStyle(color: Colors.red),)
+                              ],
+                            ),
+                          ],
                         )
-                      ],
+                      ),
+                      //otp
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width/2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextField(
+                                  keyboardType: TextInputType.number,
+                                  maxLength: 6,
+                                  controller: otp,
+                                  decoration: const InputDecoration(label: Text("Mã xác nhận",style:TextStyle(fontWeight: FontWeight.w500))),
+                                ),
+                              ],
+                            )
+                          ),
+                          Padding(padding: EdgeInsets.fromLTRB(22, 0, 0, 0)),
+                          GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                if(email.text.isEmpty){
+                                  TBEmail = "Vui lòng nhập Email";
+                                }
+                                else{
+                                  isOTPSender = true;
+                                  TBEmail ="";
+                                }
+                                if(isOTPSender){
+                                  Timer.periodic(const Duration(seconds: 59),(timer){
+                                    TBOTP = "Chờ ${timer.tick}s";
+                                    if(timer.tick==0){
+                                      TBOTP = "Gửi lại";
+                                      isOTPSender = false;
+                                    }
+                                  });
+                                }
+                              });
+                            },
+                            child: Text(TBOTP,style: TextStyle(color: Color.fromRGBO(14, 52, 201, 1),fontWeight: FontWeight.bold),),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // * Vùng nút bấm (Xác nhận + Đăng nhập)
+                // Nút xác nhận
+                const Padding(padding: EdgeInsets.all(10)),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FilledButton(
+                      onPressed: (){
+                        //todo: xác nhận 
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const MyBottomNavigator()));
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(120, 120, 120, 1)),
+                      ),
+                      child: const Text("Xác nhận",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white),),
                     ),
+                    //Nút đăng nhập
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                      },
+                      child: const Text("Đăng nhập",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),)
+                    )
                   ],
                 ),
-              ),
-              
-              // * Vùng nút bấm (Xác nhận + Đăng nhập)
-              // Nút xác nhận
-              const Padding(padding: EdgeInsets.all(10)),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FilledButton(
-                    onPressed: (){
-                      //todo: xác nhận 
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MyBottomNavigator()));
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(120, 120, 120, 1)),
-                    ),
-                    child: const Text("Xác nhận",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white),),
-                  ),
-                  //Nút đăng nhập
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-                    },
-                    child: const Text("Đăng nhập",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black),)
-                  )
-                ],
-              ),
-              
-            ]       
-          ),
-        ],
+                
+              ]       
+            ),
+          ],
+        ),
       ),
     );
   }

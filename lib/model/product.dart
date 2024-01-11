@@ -14,7 +14,6 @@ class Product extends StatelessWidget {
         //todo: dẫn tới chi tiết sản phẩm
         
       },
-      
       child: Container(
         width: 168,
         height: 268,

@@ -22,9 +22,8 @@ class Search_Bar extends StatelessWidget {
           ),
         child:Row(
           children: [
-            const Icon(Icons.menu,color: Colors.white,),
             Container(
-              width: MediaQuery.of(context).size.width - 150,
+              width: MediaQuery.of(context).size.width - 125,
               margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: const Text("Tìm kiếm sản phẩm",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
             ),
