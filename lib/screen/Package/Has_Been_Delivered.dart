@@ -61,8 +61,8 @@ class _HasBeenDeliveredState extends State<HasBeenDelivered> {
                           Text('Giá: 1.000.000 VND',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
                           Row(
                             children: [
-                              ElevatedButton(onPressed: null, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
-                              ElevatedButton(onPressed: null, child: Text('Đánh giá',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                              ElevatedButton(onPressed: (){}, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                              ElevatedButton(onPressed: (){}, child: Text('Đánh giá',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
                             ],
                           ),
                           Text('Thành tiền: 1.000.000 VND',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
@@ -104,8 +104,8 @@ class _HasBeenDeliveredState extends State<HasBeenDelivered> {
                           Text('Giá: 1.000.000 VND',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
                           Row(
                             children: [
-                              ElevatedButton(onPressed: null, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
-                              ElevatedButton(onPressed: null, child: Text('Đánh giá',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                              ElevatedButton(onPressed: (){}, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                              ElevatedButton(onPressed: (){}, child: Text('Đánh giá',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(20, 40)),backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
                             ],
                           ),
                           Text('Thành tiền: 1.000.000 VND',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),

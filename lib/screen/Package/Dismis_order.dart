@@ -56,7 +56,7 @@ class _DismisOrderState extends State<DismisOrder> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ElevatedButton(onPressed: null, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                          ElevatedButton(onPressed: (){}, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
                           Text('Dép tổ ong',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
                         
                           Row(children: [SizedBox(width: 25,), Text('vũ khí của má',style: TextStyle(color: Colors.white),),SizedBox(width: 40,),Text('x1',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)],),
@@ -95,7 +95,7 @@ class _DismisOrderState extends State<DismisOrder> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ElevatedButton(onPressed: null, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                          ElevatedButton(onPressed: (){}, child: Text('Mua lại',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
                           Text('Dép tổ ong',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
                         
                           Row(children: [SizedBox(width: 25,), Text('vũ khí của má',style: TextStyle(color: Colors.white),),SizedBox(width: 40,),Text('x1',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)],),
