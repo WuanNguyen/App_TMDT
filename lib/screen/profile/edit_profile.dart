@@ -58,15 +58,17 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('Edit Profile',style: TextStyle(color: Colors.white),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
           onPressed: () {
             // Xử lý khi nút arrow_back được nhấn
             Navigator.pop(context);
           },
         ),
+        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
+      backgroundColor: Color(0xFFD2EDE0),
       body: Center(
         child:Column(
           //mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo chiều dọc
@@ -119,11 +121,11 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width/1.2,
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
-                    color: const Color.fromARGB(255, 234, 148, 148),
+                    color: const Color.fromRGBO(46, 91, 69, 1),
                     width: 2.0,
                     ),
                   ),
@@ -131,6 +133,10 @@ class _EditProfileState extends State<EditProfile> {
                   controller: fullname,
                   decoration: InputDecoration(
                   labelText: 'Họ và tên',
+                   prefixIcon: Icon(
+                    Icons.account_circle,
+                    color: Color.fromRGBO(46, 91, 69, 1),
+                  ),
                    ),
                  ),
                  
@@ -142,7 +148,7 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
-                    color: const Color.fromARGB(255, 234, 148, 148),
+                    color: const Color.fromRGBO(46, 91, 69, 1),
                     width: 2.0,
                     ),
                   ),
@@ -150,6 +156,10 @@ class _EditProfileState extends State<EditProfile> {
                     controller: phone,
                   decoration: InputDecoration(
                   labelText: 'Số Điện Thoại',
+                  prefixIcon: Icon(
+                    Icons.phone,
+                    color: Color.fromRGBO(46, 91, 69, 1),
+                  ),
                    ),
                  ),
                 ),
@@ -160,7 +170,7 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
-                    color: const Color.fromARGB(255, 234, 148, 148),
+                    color: const Color.fromRGBO(46, 91, 69, 1),
                     width: 2.0,
                     ),
                   ),
@@ -168,6 +178,10 @@ class _EditProfileState extends State<EditProfile> {
                   controller: email,
                   decoration: InputDecoration(
                   labelText: 'Email',
+                   prefixIcon: Icon(
+                    Icons.email,
+                    color: Color.fromRGBO(46, 91, 69, 1),
+                  ),
                    ),
                  ),
                 ),
@@ -178,7 +192,7 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
-                    color: const Color.fromARGB(255, 234, 148, 148),
+                    color: Color.fromRGBO(46, 91, 69, 1),
                     width: 2.0,
                     ),
                   ),
@@ -186,11 +200,18 @@ class _EditProfileState extends State<EditProfile> {
                   controller: address,
                   decoration: InputDecoration(
                   labelText: 'Địa chỉ',
+                   prefixIcon: Icon(
+                    Icons.location_on,
+                    color: Color.fromRGBO(46, 91, 69, 1),
+                  ),
                    ),
                  ),
                 ),
                 SizedBox(height: 20,),
                 ElevatedButton(
+                   style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(46, 91, 69, 1))
+                  ),
                 onPressed: () {
                  //Sử lý sự kiện button edit-----------
                  setState(() {
@@ -201,7 +222,7 @@ class _EditProfileState extends State<EditProfile> {
                   // Navigator.push(context, 
                   // MaterialPageRoute(builder: (context) => ProfileScreen()));
                 },
-                child: Text('Cập nhật thông tin'),
+                child: Text('Cập nhật thông tin',style: TextStyle(color: Color.fromRGBO(252, 255, 254, 1)),),
               ),
               ],
             ),

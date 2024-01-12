@@ -83,19 +83,6 @@ class _CartScreenState extends State<CartScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD:lib/screen/cart/cart_page.dart
-    return Container(
-      color:const Color(0xFFD2EDE0),
-      child: ListView(
-      
-<<<<<<< HEAD:lib/screen/cart/cart_page.dart
-      children: [Text("Cart Page")],
-     ),
-=======
-      children: const [Text("Cart Page")],
-    ),
->>>>>>> vi:lib/screen/cart_page.dart
-=======
     int tongtien = 2000000;
     int thanhtien = 300000000;
     int dagiam = 5000000;
@@ -190,10 +177,7 @@ class _CartScreenState extends State<CartScreen> {
                               primary: Colors.green,
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => detail_cart()));
+                             // sẽ hiển thị thông báo thành công và xóa các item trong giỏ hàng ...
                             },
                             child: const Text(
                               'Đặt hàng',
@@ -206,7 +190,6 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
->>>>>>> thang:lib/screen/cart_page.dart
     );
   }
 }

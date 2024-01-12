@@ -12,7 +12,7 @@ class _CompletedState extends State<Completed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Đã giao hàng'),
+        title: Text('Đã giao hàng',style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -20,6 +20,7 @@ class _CompletedState extends State<Completed> {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
       body: Center(
         child: Text('Nội dung trang edit'),

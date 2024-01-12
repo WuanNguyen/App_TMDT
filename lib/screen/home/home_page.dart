@@ -17,26 +17,17 @@ class _HomeScreenState extends State<HomeScreen> {
   String diachi = "65 Huỳnh Thúc Khánh, P.Bến Nghé, Q.11";
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD:lib/screen/home/home_page.dart
-    return Container(
-      color:Color(0xFFD2EDE0),
-      child: ListView(
-      
-      children: [Text("Home Page")],
-      
-    ),
-=======
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Vietcomshoes",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 1),fontSize: 25,fontFamily:'Rufina'),),
-        actions: [
-          GestureDetector(
-            child:Image.asset('assets/img/user.png',height: 50,width: 50,),
-            onTap: (){},
-          )
-        ],
-        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Vietcomshoes",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 1),fontSize: 25,fontFamily:'Rufina'),),
+      //   actions: [
+      //     GestureDetector(
+      //       child:Image.asset('assets/img/user.png',height: 50,width: 50,),
+      //       onTap: (){},
+      //     )
+      //   ],
+      //   backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
+      // ),
       drawer: MyDrawer(),
       body: Container(
         color: const Color.fromRGBO(210, 237, 224, 1),
@@ -122,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
->>>>>>> vi:lib/screen/home_page.dart
     );
   }
 }

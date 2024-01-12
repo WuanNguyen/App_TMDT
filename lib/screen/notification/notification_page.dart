@@ -117,14 +117,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD:lib/screen/notification/notification_page.dart
-    return Container(
-      color:const Color(0xFFD2EDE0),
-      child: ListView(
-      
-      children: const [Text("Notification Page")],
-    ),
-=======
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFFD2EDE0),
@@ -142,7 +134,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           },
         ),
       ),
->>>>>>> thang:lib/screen/notification_page.dart
     );
   }
 }

@@ -28,16 +28,26 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       appBar: AppBar(
-       // title: Text("Bottom Navigation Bar"),
+        title: const Text("Vietcomshoes",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 1),fontSize: 25,fontFamily:'Rufina'),),
+        actions: [
+          GestureDetector(
+            child: ClipOval(
+              child: Image.asset(
+                "assets/img/avatar.jpg",
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+              ),
+            ),
+            onTap: (){},
+          )
+        ],
+        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
       body: _screens[_currentIndex],
       drawer: MyDrawer(), // Add the drawer here
-=======
-      body: _screens[_currentIndex],//! đổi tên file này thành screen 
-      drawer: const MyDrawer(), // Add the drawer here
->>>>>>> vi
+
       bottomNavigationBar: CurvedNavigationBar(
         
         color: const Color.fromARGB(255, 28, 80, 29),

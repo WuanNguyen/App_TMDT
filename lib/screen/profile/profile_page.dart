@@ -91,12 +91,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // ),
           const SizedBox(height: 10),
           ElevatedButton(
+            style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(46, 91, 69, 1))
+                  ),
             onPressed: () {
               //Sử lý sự kiện đưa trang edit
               Navigator.push(context, 
               MaterialPageRoute(builder: (context) => EditProfile()));
             },
-            child: Text('Edit Profile'),
+            child: Text('Edit Profile',style: TextStyle(color: Colors.white),),
           ),
           const SizedBox(height: 15),
           //thanh công cụ-------------------------------------------------------------------------------------

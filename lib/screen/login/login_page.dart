@@ -1,8 +1,8 @@
 // màng hình đăng nhập
 
 import 'package:doan_tmdt/model/bottom_appar.dart';
-import 'package:doan_tmdt/screen/forgot_password_page.dart';
-import 'package:doan_tmdt/screen/register_page.dart';
+import 'package:doan_tmdt/screen/login/forgot_password_page.dart';
+import 'package:doan_tmdt/screen/login/register_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

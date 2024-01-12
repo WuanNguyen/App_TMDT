@@ -12,7 +12,7 @@ class _WaitDeliveryState extends State<WaitDelivery> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chờ giao hàng'),
+        title: Text('Chờ giao hàng',style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -20,6 +20,7 @@ class _WaitDeliveryState extends State<WaitDelivery> {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
       body: Center(
         child: Text('Nội dung trang edit'),

@@ -12,7 +12,7 @@ class _HistorysState extends State<Historys> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lịch sử mua hàng'),
+        title: Text('Lịch sử mua hàng',style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -20,6 +20,7 @@ class _HistorysState extends State<Historys> {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
       body: Center(
         child: Text('Nội dung trang edit'),
