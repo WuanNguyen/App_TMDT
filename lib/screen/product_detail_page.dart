@@ -15,7 +15,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   bool isButtonPressed42 = false;
   bool isButtonPressed43 = false;
   bool iconTraiTim = false;
-  bool btnDo = true;
+  bool btnDo = false;
   bool btnXanh = false;
   bool btnVang = false;
   bool btnLuc = false;

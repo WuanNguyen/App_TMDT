@@ -1,4 +1,8 @@
 import 'package:doan_tmdt/model/bottom_appar.dart';
+import 'package:doan_tmdt/screen/Package/Dismis_order.dart';
+import 'package:doan_tmdt/screen/Package/Has_Been_Delivered.dart';
+import 'package:doan_tmdt/screen/Package/Is_Being_Deliver.dart';
+import 'package:doan_tmdt/screen/Package/Wait_Comfirm.dart';
 import 'package:doan_tmdt/screen/product_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:doan_tmdt/screen/login_page.dart';
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ProductDetailScreen()
+      home: HasBeenDelivered()
     );
   }
 }
