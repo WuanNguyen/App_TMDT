@@ -1,7 +1,11 @@
 import 'package:doan_tmdt/firebase_options.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
+<<<<<<< HEAD
 import 'package:doan_tmdt/screen/cart/cart_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+=======
+import 'package:doan_tmdt/screen/product_detail_page.dart';
+>>>>>>> thong
 import 'package:flutter/material.dart';
 import 'package:doan_tmdt/screen/login/login_page.dart';
 Future<void> main() async {
@@ -22,8 +26,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+<<<<<<< HEAD
      // home: LoginScreen()
      home: MyBottomNavigator(),
+=======
+      home: ProductDetailScreen()
+>>>>>>> thong
     );
   }
 }
