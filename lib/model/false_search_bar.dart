@@ -1,3 +1,4 @@
+import 'package:doan_tmdt/screen/search_page.dart';
 import 'package:flutter/material.dart';
 
 class Search_Bar extends StatelessWidget {
@@ -8,7 +9,7 @@ class Search_Bar extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         //todo: chuyển qua trang tìm kiếm 
-
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchScreen()));
       },
       child: Container(
         height: 50,
