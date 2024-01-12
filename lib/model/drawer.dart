@@ -1,6 +1,6 @@
-import 'package:doan_tmdt/screen/cart_page.dart';
-import 'package:doan_tmdt/screen/home_page.dart';
-import 'package:doan_tmdt/screen/login_page.dart';
+import 'package:doan_tmdt/screen/cart/cart_page.dart';
+import 'package:doan_tmdt/screen/home/home_page.dart';
+import 'package:doan_tmdt/screen/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {

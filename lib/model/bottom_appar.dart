@@ -1,8 +1,8 @@
 import 'package:doan_tmdt/model/drawer.dart';
-import 'package:doan_tmdt/screen/cart_page.dart';
-import 'package:doan_tmdt/screen/home_page.dart';
-import 'package:doan_tmdt/screen/notification_page.dart';
-import 'package:doan_tmdt/screen/profile_page.dart';
+import 'package:doan_tmdt/screen/cart/cart_page.dart';
+import 'package:doan_tmdt/screen/home/home_page.dart';
+import 'package:doan_tmdt/screen/notification/notification_page.dart';
+import 'package:doan_tmdt/screen/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -29,7 +29,7 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text("Bottom Navigation Bar"),
+       // title: Text("Bottom Navigation Bar"),
       ),
       body: _screens[_currentIndex],
       drawer: MyDrawer(), // Add the drawer here
