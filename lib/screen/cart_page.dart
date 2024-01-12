@@ -23,6 +23,139 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  @override
+  Widget build(BuildContext context) {
+    int tongtien = 2000000;
+    int thanhtien = 300000000;
+    int dagiam = 5000000;
+    const List<String> list = <String>[
+      'Chọn mã giảm giá',
+      'Mã giảm 1',
+      'Mã giảm 2',
+      'Mã giảm 3',
+      'Mã giảm 4'
+    ];
+    String dropdownValue = list.first;
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Color(0xFFD2EDE0),
+        body: Column(
+          children: [
+            Expanded(
+              child: cardcart(),
+            ),
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                  ),
+                  color: Color(0xFFD2EDE0),
+                ),
+                height: 130,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Chọn mã giảm giá',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Container(
+                          child: DropdownMenu<String>(
+                            width: 190,
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                            ),
+                            initialSelection: list.first,
+                            onSelected: (String? value) {
+                              setState(() {
+                                dropdownValue = value!;
+                              });
+                            },
+                            dropdownMenuEntries: list
+                                .map<DropdownMenuEntry<String>>((String value) {
+                              return DropdownMenuEntry<String>(
+                                  value: value, label: value);
+                            }).toList(),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      height: 2,
+                      child: Container(
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Tổng tiền: '),
+                                Text('Đã giảm: '),
+                                Text('Thành tiền: ')
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('$tongtien'),
+                                Text('$dagiam'),
+                                Text('$thanhtien')
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(right: 50.0),
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => detail_cart()));
+                              },
+                              child: const Text(
+                                'Đặt hàng',
+                                style: TextStyle(color: Colors.black),
+                              )),
+                        )
+                      ],
+                    )
+                  ],
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class cardcart extends StatefulWidget {
+  const cardcart({super.key});
+
+  @override
+  State<cardcart> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<cardcart> {
   final List<CartItem> cartItem = [
     CartItem(
         imageUrl:
@@ -83,296 +216,94 @@ class _CartScreenState extends State<CartScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    int tongtien = 2000000;
-    int thanhtien = 300000000;
-    int dagiam = 5000000;
-    const List<String> list = <String>[
-      'Chọn mã giảm giá',
-      'Mã giảm 1',
-      'Mã giảm 2',
-      'Mã giảm 3',
-      'Mã giảm 4'
-    ];
-    String dropdownValue = list.first;
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xFFD2EDE0),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: cartItem.length,
-                itemBuilder: (context, index) {
-                  return Cartcard(cartItems: cartItem[index]);
-                },
-              ),
+    return ListView.builder(
+      itemCount: cartItem.length,
+      itemBuilder: (context, index) {
+        return Card(
+          color: Colors.green[200],
+          margin: EdgeInsets.all(5.0),
+          child: ListTile(
+            leading: Image.network(
+              cartItem[index].imageUrl,
+              width: 100.0,
+              height: 100.0,
+              fit: BoxFit.cover,
             ),
-            Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
-                  ),
-                  color: Color(0xFFD2EDE0),
-                ),
-                height: 130,
-                child: Column(
+            title: Text(
+              cartItem[index].title,
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text(
-                          'Chọn mã giảm giá',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Container(
-                          child: DropdownMenu<String>(
-                            width: 150,
-                            textStyle: TextStyle(
-                              fontSize: 11,
-                            ),
-                            initialSelection: list.first,
-                            onSelected: (String? value) {
-                              setState(() {
-                                dropdownValue = value!;
-                              });
-                            },
-                            dropdownMenuEntries: list
-                                .map<DropdownMenuEntry<String>>((String value) {
-                              return DropdownMenuEntry<String>(
-                                  value: value, label: value);
-                            }).toList(),
-                          ),
-                        )
-                      ],
+                    Text(
+                      'Size: ${cartItem[index].size}',
+                      style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Tổng tiền: '),
-                            Text('Đã giảm: '),
-                            Text('Thành tiền: ')
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('$tongtien'),
-                            Text('$dagiam'),
-                            Text('$thanhtien')
-                          ],
-                        ),
-                        SizedBox(
-                          height: 50,
-                          child: Container(
-                            color: Colors.white,
-                          ),
-                        ),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => detail_cart()));
-                            },
-                            child: const Text(
-                              'Đặt hàng',
-                              style: TextStyle(color: Colors.black),
-                            ))
-                      ],
-                    )
+                    SizedBox(height: 8.0),
+                    Text(
+                      'Giá: ${cartItem[index].price}',
+                      style: TextStyle(color: Colors.amber[600]),
+                    ),
                   ],
-                )),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class cardcart extends StatefulWidget {
-  const cardcart({super.key});
-
-  @override
-  State<cardcart> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<cardcart> {
-  late CartItem cartItems;
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.green[200],
-      margin: EdgeInsets.all(5.0),
-      child: ListTile(
-        leading: Image.network(
-          cartItems.imageUrl,
-          width: 100.0,
-          height: 100.0,
-          fit: BoxFit.cover,
-        ),
-        title: Text(
-          cartItems.title,
-          style: TextStyle(color: Colors.white),
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Size: ${cartItems.size}',
-                  style: TextStyle(fontSize: 10, color: Colors.white),
                 ),
-                SizedBox(height: 8.0),
-                Text(
-                  'Giá: ${cartItems.price}',
-                  style: TextStyle(color: Colors.amber[600]),
-                ),
+                cartItem[index].count < 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                              ),
+                              onPressed: () {},
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  'Xóa',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ))
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              hoverColor: Colors.green,
+                              onPressed: () {
+                                setState(() {
+                                  cartItem[index].count++;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.add,
+                              )),
+                          const SizedBox(width: 10),
+                          Text('${cartItem[index].count}'),
+                          const SizedBox(width: 10),
+                          IconButton(
+                              hoverColor: Colors.green,
+                              onPressed: () {
+                                setState(() {
+                                  cartItem[index].count--;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.remove,
+                              )),
+                        ],
+                      ),
               ],
             ),
-            cartItems.count < 0
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                          ),
-                          onPressed: () {
-                            cartItems.count + 1;
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.all(8),
-                            child: Text('${cartItems.count}'),
-                          ))
-                    ],
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          hoverColor: Colors.green,
-                          onPressed: () {
-                            setState(() {
-                              cartItems.count++;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.add,
-                          )),
-                      const SizedBox(width: 10),
-                      Text('${cartItems.count}'),
-                      const SizedBox(width: 10),
-                      IconButton(
-                          hoverColor: Colors.green,
-                          onPressed: () {
-                            setState(() {
-                              cartItems.count++;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.remove,
-                          )),
-                    ],
-                  ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Cartcard extends StatelessWidget {
-  final CartItem cartItems;
-  Cartcard({required this.cartItems});
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.green[200],
-      margin: EdgeInsets.all(5.0),
-      child: ListTile(
-        leading: Image.network(
-          cartItems.imageUrl,
-          width: 100.0,
-          height: 100.0,
-          fit: BoxFit.cover,
-        ),
-        title: Text(
-          cartItems.title,
-          style: TextStyle(color: Colors.white),
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Size: ${cartItems.size}',
-                  style: TextStyle(fontSize: 10, color: Colors.white),
-                ),
-                SizedBox(height: 8.0),
-                Text(
-                  'Giá: ${cartItems.price}',
-                  style: TextStyle(color: Colors.amber[600]),
-                ),
-              ],
-            ),
-            cartItems.count < 0
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                          ),
-                          onPressed: () {
-                            cartItems.count + 1;
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.all(8),
-                            child: Text('Xoa'),
-                          ))
-                    ],
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          hoverColor: Colors.green,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.add,
-                          )),
-                      const SizedBox(width: 10),
-                      Text('${cartItems.count}'),
-                      const SizedBox(width: 10),
-                      IconButton(
-                          hoverColor: Colors.green,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.remove,
-                          )),
-                    ],
-                  ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

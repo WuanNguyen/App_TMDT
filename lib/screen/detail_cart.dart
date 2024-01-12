@@ -1,3 +1,5 @@
+import 'package:doan_tmdt/screen/adress_cart.dart';
+import 'package:doan_tmdt/screen/cart_page.dart';
 import 'package:flutter/material.dart';
 
 class CartItem {
@@ -22,64 +24,6 @@ class detail_cart extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<detail_cart> {
-  final List<CartItem> cartItem = [
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-    CartItem(
-        imageUrl:
-            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-        title: 'AF1',
-        size: 20,
-        price: 20000,
-        count: 2),
-  ];
   @override
   Widget build(BuildContext context) {
     int tongtien = 2000000;
@@ -99,38 +43,52 @@ class _MyWidgetState extends State<detail_cart> {
                   bottomRight: Radius.circular(20.0),
                 ),
               ),
-              child: const Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Địa chỉ nhận hàng',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Le Quoc Thang | 033****24',
-                        textAlign: TextAlign.start,
-                      ),
-                      Text(
-                        '24 cô giang, phường cô giang, quận 2,HCM',
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: cartItem.length,
-                itemBuilder: (context, index) {
-                  return Cartcard(cartItems: cartItem[index]);
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => address_cart()));
                 },
+                icon: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.room),
+                            const Text(
+                              'Địa chỉ nhận hàng',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 8),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Le Quoc Thang | 033****24',
+                                textAlign: TextAlign.start,
+                              ),
+                              Text(
+                                '24 cô giang, phường cô giang, quận 2,HCM',
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Icon(Icons.arrow_forward_ios)
+                  ],
+                ),
               ),
             ),
+            Expanded(child: cardcart()),
             Container(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
@@ -178,15 +136,34 @@ class _MyWidgetState extends State<detail_cart> {
                                   primary: Colors.green,
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const detail_cart()));
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor:
+                                            const Color(0xFFD2EDE0),
+                                        title: Text('Thông báo'),
+                                        content: Text('Đặt hàng thành công'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              // Đóng hộp thoại khi nút được nhấn
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              'Đóng',
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                                 child: const Text(
                                   'Đặt hàng',
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(color: Colors.white),
                                 )),
                             SizedBox(
                               height: 10,
@@ -203,11 +180,11 @@ class _MyWidgetState extends State<detail_cart> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const detail_cart()));
+                                              const CartScreen()));
                                 },
                                 child: const Text(
                                   'Hủy',
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(color: Colors.white),
                                 )),
                           ],
                         )
@@ -222,60 +199,117 @@ class _MyWidgetState extends State<detail_cart> {
   }
 }
 
-class Cartcard extends StatelessWidget {
-  final CartItem cartItems;
-  Cartcard({required this.cartItems});
-  void tang() {
-    cartItems.count++;
-  }
-
-  void giam() {
-    cartItems.count++;
-  }
+class cardcart extends StatefulWidget {
+  const cardcart({super.key});
 
   @override
+  State<cardcart> createState() => _cart();
+}
+
+class _cart extends State<cardcart> {
+  final List<CartItem> cartItem = [
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF1',
+        size: 20,
+        price: 20000,
+        count: 2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF2',
+        size: 20,
+        price: 20000,
+        count: 2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF3',
+        size: 20,
+        price: 20000,
+        count: 2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF4',
+        size: 20,
+        price: 20000,
+        count: -2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF5',
+        size: 20,
+        price: 20000,
+        count: 2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF6',
+        size: 20,
+        price: 20000,
+        count: 2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF7',
+        size: 20,
+        price: 20000,
+        count: 2),
+    CartItem(
+        imageUrl:
+            'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
+        title: 'AF8',
+        size: 20,
+        price: 20000,
+        count: 2),
+  ];
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.green[200],
-      margin: const EdgeInsets.all(5.0),
-      child: ListTile(
-        leading: Image.network(
-          cartItems.imageUrl,
-          width: 100.0,
-          height: 100.0,
-          fit: BoxFit.cover,
-        ),
-        title: Text(
-          cartItems.title,
-          style: const TextStyle(color: Colors.white),
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView.builder(
+      itemCount: cartItem.length,
+      itemBuilder: (context, index) {
+        return Card(
+          color: Colors.green[200],
+          margin: EdgeInsets.all(5.0),
+          child: ListTile(
+            leading: Image.network(
+              cartItem[index].imageUrl,
+              width: 100.0,
+              height: 100.0,
+              fit: BoxFit.cover,
+            ),
+            title: Text(
+              cartItem[index].title,
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Size: ${cartItems.size}',
-                  style: const TextStyle(fontSize: 10, color: Colors.white),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Size: ${cartItem[index].size}',
+                      style: TextStyle(fontSize: 10, color: Colors.white),
+                    ),
+                    SizedBox(height: 8.0),
+                    Text(
+                      'Giá: ${cartItem[index].price}',
+                      style: TextStyle(color: Colors.amber[600]),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8.0),
                 Text(
-                  'Giá: ${cartItems.price}',
-                  style: TextStyle(color: Colors.amber[600]),
-                ),
+                  'x${cartItem[index].count}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
               ],
             ),
-            Text(
-              'x${cartItems.count}',
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 10,
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
