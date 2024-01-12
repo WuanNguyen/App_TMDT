@@ -22,10 +22,9 @@ class _IsBeingDeliverState extends State<IsBeingDeliver> {
         ),
         backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           color: Color.fromARGB(255, 220, 226, 223),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
