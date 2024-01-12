@@ -15,7 +15,7 @@ class _CartScreenState extends State<CartScreen> {
       child: ListView(
       
       children: [Text("Cart Page")],
-    ),
+     ),
     );
   }
 }
