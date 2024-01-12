@@ -11,11 +11,16 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:Color(0xFFD2EDE0),
+      color:const Color(0xFFD2EDE0),
       child: ListView(
       
+<<<<<<< HEAD:lib/screen/cart/cart_page.dart
       children: [Text("Cart Page")],
      ),
+=======
+      children: const [Text("Cart Page")],
+    ),
+>>>>>>> vi:lib/screen/cart_page.dart
     );
   }
 }

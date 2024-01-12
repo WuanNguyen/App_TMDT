@@ -17,7 +17,7 @@ class MyBottomNavigator extends StatefulWidget {
 class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   int _currentIndex = 0;
 
-  List _screens = [HomeScreen(), CartScreen(), NotificationScreen(), ProfileScreen()];
+  final List _screens = [const HomeScreen(), const CartScreen(), const NotificationScreen(), const ProfileScreen()];
 
   void _updateIndex(int value) {
     setState(() {
@@ -28,20 +28,25 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       appBar: AppBar(
        // title: Text("Bottom Navigation Bar"),
       ),
       body: _screens[_currentIndex],
       drawer: MyDrawer(), // Add the drawer here
+=======
+      body: _screens[_currentIndex],//! đổi tên file này thành screen 
+      drawer: const MyDrawer(), // Add the drawer here
+>>>>>>> vi
       bottomNavigationBar: CurvedNavigationBar(
         
-        color: Color.fromARGB(255, 28, 80, 29),
+        color: const Color.fromARGB(255, 28, 80, 29),
         buttonBackgroundColor: Colors.white,
-        backgroundColor: Color(0xFFD2EDE0),
-        animationDuration: Duration(seconds: 1),
-        animationCurve: Curves.bounceOut,
+        backgroundColor: const Color(0xFFD2EDE0),
+        animationDuration: const Duration(milliseconds: 500),
+        animationCurve: Curves.decelerate,
 
-        items: <Widget>[
+        items: const <Widget>[
           Icon(Icons.home,color: Color.fromARGB(255, 193, 204, 69),),
           Icon(Icons.shopping_cart,color: Color.fromARGB(255, 193, 204, 69),),
           Icon(Icons.notifications,color: Color.fromARGB(255, 193, 204, 69),),
