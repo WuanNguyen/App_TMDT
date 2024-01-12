@@ -16,7 +16,7 @@ class _ProductListState extends State<ProductList> {
       width: MediaQuery.of(context).size.width,
       height: 300 * (pro.length / 2).ceil().toDouble(),
       child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: (pro.length / 2).ceil(),
         itemBuilder: (context,index){
           if(pro.length% 2 != 0 && index == ((pro.length / 2).ceil()) - 1){
