@@ -25,93 +25,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final List<NotificationItem> notifications = [
     NotificationItem(
       imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
-      date: '01/08/2024',
-    ),
-    NotificationItem(
-      imageUrl:
-          'https://cdn.tgdd.vn/Files/2022/05/28/1435541/cach-chon-size-giay-nike-air-force-1-chuan-vua-ban-chan-202205300637505742.jpg',
-      title: 'Thông báo 1',
-      content: 'Nội dung thông báo 1',
+          'https://product.hstatic.net/1000362402/product/agct008-2_1_8ed3d98dc1964dcc9c4741a957fa30d8_master_5296d65ea6a5418cb72a868234b425dc_master.jpg',
+      title: 'Đã xác nhận',
+      content: 'Đơn hàng đã được cửa hàng tiếp nhận và sẻ giao đến cho bạn trong thời gian sớm nhất.',
       date: '01/08/2024',
     ),
   ];
@@ -120,13 +36,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFFD2EDE0),
-        // appBar: AppBar(
-        //   title: const Text(
-        //     'Thông báo',
-        //   ),
-        //   centerTitle: true,
-        //   backgroundColor: const Color.fromRGBO(35, 112, 73, 100),
-        // ),
         body: ListView.builder(
           itemCount: notifications.length,
           itemBuilder: (context, index) {
@@ -155,7 +64,7 @@ class NotificationCard extends StatelessWidget {
           height: 100.0,
           fit: BoxFit.cover,
         ),
-        title: Text(notification.title),
+        title: Text(notification.title,style: TextStyle(fontWeight: FontWeight.bold),),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -166,7 +75,7 @@ class NotificationCard extends StatelessWidget {
             SizedBox(height: 8.0),
             Text(
               '${notification.date}',
-              style: TextStyle(fontSize: 8),
+              style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
             ),
           ],
         ),
