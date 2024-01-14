@@ -2,6 +2,7 @@ import 'package:doan_tmdt/firebase_options.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
 import 'package:doan_tmdt/screen/cart/cart_page.dart';
 import 'package:doan_tmdt/screen/home/product_detail_page.dart';
+import 'package:doan_tmdt/screen/notification/notification_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:doan_tmdt/screen/login/login_page.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
      // home: LoginScreen()
-     home: MyBottomNavigator(),
+     home: NotificationScreen(),
     
     );
   }
