@@ -2,7 +2,6 @@ import 'package:doan_tmdt/model/drawer.dart';
 import 'package:doan_tmdt/screen/cart/cart_page.dart';
 import 'package:doan_tmdt/screen/home/home_page.dart';
 import 'package:doan_tmdt/screen/notification/notification_page.dart';
-import 'package:doan_tmdt/screen/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -17,7 +16,7 @@ class MyBottomNavigator extends StatefulWidget {
 class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   int _currentIndex = 0;
 
-  final List _screens = [const HomeScreen(), const CartScreen(), const NotificationScreen(), const ProfileScreen()];
+  final List _screens = [const HomeScreen(), const CartScreen(), const NotificationScreen()];
 
   void _updateIndex(int value) {
     setState(() {
