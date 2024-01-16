@@ -3,6 +3,7 @@ import 'package:doan_tmdt/screen/cart/cart_page.dart';
 import 'package:doan_tmdt/screen/home/home_page.dart';
 import 'package:doan_tmdt/screen/notification/notification_page.dart';
 import 'package:doan_tmdt/screen/profile/profile_page.dart';
+import 'package:doan_tmdt/screen/profile/user.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -24,6 +25,8 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
       _currentIndex = value;
     });
   }
+  // lấy dữ liệu user
+  //--------------------------
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,10 @@
 // màng hình đăng nhập
 
+import 'package:doan_tmdt/auth/firebase_auth.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
 import 'package:doan_tmdt/screen/login/forgot_password_page.dart';
 import 'package:doan_tmdt/screen/login/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,6 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController password = TextEditingController();
   String TBEmail = "";
   String TBPassword = "";
+
+  var _fireauth1 = FirebAuth();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,9 +116,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           TBPassword = "";
                           });
                         }
-                        if(email.text=="Huan"&& password.text=="123"){
+                        // đăng nhập thành công
+                        _fireauth1.signIn(email.text, password.text, (){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
-                        }
+                        });
+                        // if(email.text=="Huan"&& password.text=="123"){
+                        //   Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
+                        // }
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(120, 120, 120, 1)),

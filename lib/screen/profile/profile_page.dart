@@ -5,6 +5,7 @@ import 'package:doan_tmdt/screen/profile/statistics/history.dart';
 import 'package:doan_tmdt/screen/profile/statistics/liked_product.dart';
 import 'package:doan_tmdt/screen/profile/statistics/wait_confirm_product.dart';
 import 'package:doan_tmdt/screen/profile/statistics/wait_delivery.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -16,20 +17,23 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+//-------------------------------------------------------------
 
+
+//------------------------------------------------------------
   final DatabaseReference _databaseReference = FirebaseDatabase(
     databaseURL:
         'https://tmdt-bangiay-default-rtdb.asia-southeast1.firebasedatabase.app/',
   ).ref();
-
-  List<Map<dynamic, dynamic>> lst_users = [];
+  
+   List<Map<dynamic, dynamic>> lst_users = [];
 
   Future<void> _loadData() async {
     try {
       DatabaseEvent _event = await _databaseReference.once();
       DataSnapshot? _dataSnapshot = _event.snapshot;
       if (_dataSnapshot != null && _dataSnapshot.value != null) {
-        Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['users'];
+        Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['infomation'];
         data.forEach((key, value) {
           lst_users.add(value);
         });
@@ -43,6 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
    String name = '';
+   String url = '';
 
   @override
   void initState() {
@@ -54,7 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     //---------------
     try{
-      name = lst_users[0]['info']['fullname'];
+      name = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['fullname'];
+      url = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['url'];
     }catch(e){
       print(e.toString());
     }
@@ -75,8 +81,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             child: ClipOval(
-              child: Image.asset(
-                "assets/img/avatar.jpg",
+              child: Image.network(
+                url,
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
@@ -277,6 +283,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
     );
-
+    
   }
 }

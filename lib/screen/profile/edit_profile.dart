@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:doan_tmdt/screen/profile/profile_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController email = TextEditingController();
   final TextEditingController phone = TextEditingController();
   final TextEditingController address = TextEditingController();
+  String url = '';
 
    final DatabaseReference _databaseReference = FirebaseDatabase(
     databaseURL:
@@ -24,32 +27,33 @@ class _EditProfileState extends State<EditProfile> {
 
   List<Map<dynamic, dynamic>> Lst_user = [];
   //load data
-  Future<void> _loadData() async {
-    try {
-      DatabaseEvent _event = await _databaseReference.once();
-      DataSnapshot? _dataSnapshot = _event.snapshot;
-      if (_dataSnapshot != null && _dataSnapshot.value != null) {
-        Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['users'];
-        data.forEach((key, value) {
-          Lst_user.add(value);
-        });
-        // print(lst_cat);
-        // print(lst_cat[0]['namepro']);
-      }
-      setState(() {
+  // Future<void> _loadData() async {
+  //   try {
+  //     DatabaseEvent _event = await _databaseReference.once();
+  //     DataSnapshot? _dataSnapshot = _event.snapshot;
+  //     if (_dataSnapshot != null && _dataSnapshot.value != null) {
+  //       Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['users'];
+  //       data.forEach((key, value) {
+  //         Lst_user.add(value);
+  //       });
+  //       // print(lst_cat);
+  //       // print(lst_cat[0]['namepro']);
+  //     }
+  //     setState(() {
         
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
   // edit data
   void editData() async {
     await _databaseReference.child('users').child('user0').child('info').set({
       'fullname': fullname.text,
       'email':email.text,
       'phone':phone.text,
-      'address':address.text
+      'address':address.text,
+      'url': url
     }
       
     );
@@ -107,7 +111,6 @@ class _EditProfileState extends State<EditProfile> {
                     color: Colors.white,
                     onPressed: () {
                       // Xử lý sự kiện khi nút chỉnh sửa được nhấn
-                      print('Nút chỉnh sửa được nhấn');
                     },
                   ),
                 )
@@ -236,8 +239,7 @@ class _EditProfileState extends State<EditProfile> {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      // Xử lý ảnh được chọn ở đây
-      print('Đường dẫn tệp ảnh: ${image.path}');
+      url = image.path;
     }
   }
 }
