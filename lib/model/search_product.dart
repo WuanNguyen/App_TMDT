@@ -1,11 +1,10 @@
+import 'package:doan_tmdt/model/product.dart';
 import 'package:flutter/material.dart';
 
 class SearchProduct extends StatelessWidget {
-  SearchProduct({super.key,img,name,category,price});
+  SearchProduct({super.key,img,required this.product});
   String img = 'assets/img/no_image.jpg';
-  String name = 'White';
-  String category = "category";
-  int price = 1000000;
+  Map product;
   int amount = 1;
 
   @override
@@ -49,24 +48,24 @@ class SearchProduct extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
+                    Text(product['name'],style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
                     const SizedBox(width: 70,),
                     Text("x$amount",style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),)
                 ],),
                 const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 0),),
                 Row(
                   children: [
-                    Text(category,style: const TextStyle(fontSize: 10,color: Colors.white),)
+                    Text(product['category'],style: const TextStyle(fontSize: 10,color: Colors.white),)
                 ],),
                 const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0),),
                 Row(
                   children: [
-                    Text("Giá: $price VND",style: const TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
+                    Text("Giá: ${product['price']} VND",style: const TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
                 ],),
                 const Padding(padding: EdgeInsets.fromLTRB(0, 1, 0, 0),),
                 Row(
                   children: [
-                    Text("Thành tiền: ${price*amount} VND",style: const TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
+                    Text("Thành tiền: ${product['price']*amount} VND",style: const TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
                 ],),
                 const Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0),),
                 GestureDetector(

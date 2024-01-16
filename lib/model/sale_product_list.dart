@@ -9,7 +9,7 @@ class SaleProductList extends StatefulWidget {
 }
 
 class _SaleProductListState extends State<SaleProductList> {
-  List<String> imgList = List.filled(5, 'assets/img/user.png',growable: true);
+  List<String> nameList = List.filled(5, 'abc',growable: true);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,11 +17,11 @@ class _SaleProductListState extends State<SaleProductList> {
       width: MediaQuery.of(context).size.width - 10,
       child: ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: imgList.length,
+      itemCount: nameList.length,
       itemBuilder: (context,index){
         return Row(
           children: [
-            SaleProduct(img: imgList[index]),
+            SaleProduct(name: nameList[index]),
           ],
         );
       }

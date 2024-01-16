@@ -1,7 +1,5 @@
 import 'package:doan_tmdt/model/drawer.dart';
-import 'package:doan_tmdt/model/product.dart';
 import 'package:doan_tmdt/model/product_list.dart';
-import 'package:doan_tmdt/model/sale_product.dart';
 import 'package:doan_tmdt/model/sale_product_list.dart';
 import 'package:doan_tmdt/model/false_search_bar.dart';
 import 'package:flutter/material.dart';
