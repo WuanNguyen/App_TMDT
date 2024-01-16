@@ -158,8 +158,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               String uid = user.uid;
                               DatabaseReference infos = FirebaseDatabase.instance.reference().child('infomation').child(uid);
-                              String infoId = infos.push().key!;
-                              infos.child(infoId).set({
+                              //String infoId = infos.push().key!;
+                              infos.child(uid).set({
                                 'fullname':'',
                                 'email':'',
                                 'phone':'',

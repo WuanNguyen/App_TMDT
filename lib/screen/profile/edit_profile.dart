@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:doan_tmdt/screen/profile/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,7 +26,65 @@ class _EditProfileState extends State<EditProfile> {
         'https://tmdt-bangiay-default-rtdb.asia-southeast1.firebasedatabase.app/',
   ).ref();
 
-  List<Map<dynamic, dynamic>> Lst_user = [];
+    List<Map<dynamic, dynamic>> lst_users = [];
+    List<Map<dynamic, dynamic>> infoTitle = [];
+    //---------------------------------------------
+    Future<void> _loadData() async {
+    try {
+      DatabaseEvent _event = await _databaseReference.once();
+      DataSnapshot? _dataSnapshot = _event.snapshot;
+      if (_dataSnapshot != null && _dataSnapshot.value != null) {
+        Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['infomation'];
+        data.forEach((key, value) {
+          lst_users.add(value);
+        });
+      }
+      String UID = getUserUIDString();
+      for( var element in lst_users)
+      {
+       print("Đây là key: " + element.keys.toString());
+       String UIDS = "($UID)";
+       print("Đây là UID: "+ UIDS);
+       
+        if(element.keys.toString() == UIDS){
+          infoTitle.add(element);
+        }
+      }
+      //   for(int i = 0 ; i< lst_users.length;i++)
+      // {
+      //   String UID = getUserUIDString();
+      //   if(lst_users[i].keys == UID)
+      //   {
+      //     infoTitle.add(lst_users[i]);
+      //   }
+      // }
+      setState(() {
+        
+      });
+    } catch (e) {
+      print(e.toString());
+      
+    }
+     print(lst_users);
+     print("------------------0");
+     print(infoTitle);
+     String ID = getUserUIDString();
+    print("đây là ID: "+ID);
+  }
+  
+
+  String getUserUIDString() {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  if (user != null) {
+    // Kiểm tra xem user có khác null không trước khi truy cập thuộc tính uid
+    String userUID = user.uid;
+    return userUID;
+  }
+  // Trả về một giá trị mặc định hoặc chuỗi trống tùy thuộc vào yêu cầu của bạn
+  return ''; // hoặc return 'Giá trị mặc định';
+}
+//--------------------------------------------------------------------
   //load data
   // Future<void> _loadData() async {
   //   try {
@@ -47,19 +106,54 @@ class _EditProfileState extends State<EditProfile> {
   //   }
   // }
   // edit data
+  
+  //     url = infoTitle[0][ID]['url'];
+  //------------------------------
   void editData() async {
-    await _databaseReference.child('users').child('user0').child('info').set({
+    String ID = getUserUIDString();
+    print("đây là ID"+ID);
+
+    await _databaseReference.child('infomation').child(ID).child(ID).set({
       'fullname': fullname.text,
       'email':email.text,
       'phone':phone.text,
       'address':address.text,
       'url': url
-    }
-      
+     }    
     );
+  }
+  //------------------------------------
+  // void editData() async {
+  //   await _databaseReference.child('users').child('user0').child('info').set({
+  //     'fullname': fullname.text,
+  //     'email':email.text,
+  //     'phone':phone.text,
+  //     'address':address.text,
+  //     'url': url
+  //   }
+      
+  //   );
+  // }  
+  
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadData();
   }
   @override
   Widget build(BuildContext context) {
+    String url = '';
+    String ID = getUserUIDString();
+    try{
+    // name = infoTitle[0][ID]['fullname'];
+      url = infoTitle[0][ID]['url'];
+      //name = infoTitle[0]['fullname'];
+      // name = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['fullname'];
+      // url = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['url'];
+    }catch(e){
+      print(e.toString());
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile',style: TextStyle(color: Colors.white),),
@@ -94,8 +188,8 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     ),
                     child: ClipOval(
-                      child: Image.asset(
-                        "assets/img/avatar.jpg",
+                      child: Image.network(
+                        url,
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,

@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -16,10 +17,22 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
+
 class _ProfileScreenState extends State<ProfileScreen> {
 //-------------------------------------------------------------
+ final FirebaseAuth _auth = FirebaseAuth.instance;
 
+ String getUserUIDString() {
+  User? user = FirebaseAuth.instance.currentUser;
 
+  if (user != null) {
+    // Kiểm tra xem user có khác null không trước khi truy cập thuộc tính uid
+    String userUID = user.uid;
+    return userUID;
+  }
+  // Trả về một giá trị mặc định hoặc chuỗi trống tùy thuộc vào yêu cầu của bạn
+  return ''; // hoặc return 'Giá trị mặc định';
+}
 //------------------------------------------------------------
   final DatabaseReference _databaseReference = FirebaseDatabase(
     databaseURL:
@@ -27,6 +40,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ).ref();
   
    List<Map<dynamic, dynamic>> lst_users = [];
+   List<Map<dynamic, dynamic>> infoTitle = [];
+
 
   Future<void> _loadData() async {
     try {
@@ -38,16 +53,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
           lst_users.add(value);
         });
       }
+      String UID = getUserUIDString();
+      for( var element in lst_users)
+      {
+       print("Đây là key: " + element.keys.toString());
+       String UIDS = "($UID)";
+       print("Đây là UID: "+ UIDS);
+       
+        if(element.keys.toString() == UIDS){
+          infoTitle.add(element);
+        }
+      }
+      //   for(int i = 0 ; i< lst_users.length;i++)
+      // {
+      //   String UID = getUserUIDString();
+      //   if(lst_users[i].keys == UID)
+      //   {
+      //     infoTitle.add(lst_users[i]);
+      //   }
+      // }
       setState(() {
         
       });
     } catch (e) {
       print(e.toString());
+      
     }
+    print(lst_users);
+     print(infoTitle);
   }
-
-   String name = '';
+  
+  String name = '';
    String url = '';
+   
 
   @override
   void initState() {
@@ -57,14 +95,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    String ID = getUserUIDString();
     //---------------
+    // void yourFunction() async {
+    //   String? uid = await getUserUID();
+    //   if (uid != null) {
+    //     setState(() {
+    //       name = uid;
+    //     });
+    //   }
+    // }
+    // yourFunction();
+  
+
     try{
-      name = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['fullname'];
-      url = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['url'];
+     name = infoTitle[0][ID]['fullname'];
+      url = infoTitle[0][ID]['url'];
+      //name = infoTitle[0]['fullname'];
+      // name = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['fullname'];
+      // url = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['url'];
     }catch(e){
       print(e.toString());
     }
-
+    print("Đây là name: "+name);
     return Container(
       width: double.infinity,
       height: double.infinity,
