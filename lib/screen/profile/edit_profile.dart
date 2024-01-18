@@ -1,8 +1,12 @@
-import 'dart:html';
+
+
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:doan_tmdt/screen/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -109,6 +113,7 @@ class _EditProfileState extends State<EditProfile> {
   
   //     url = infoTitle[0][ID]['url'];
   //------------------------------
+  
   void editData() async {
     String ID = getUserUIDString();
     print("đây là ID"+ID);
@@ -154,7 +159,8 @@ class _EditProfileState extends State<EditProfile> {
     }catch(e){
       print(e.toString());
     }
-    return Scaffold(
+    return 
+    Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile',style: TextStyle(color: Colors.white),),
         leading: IconButton(
@@ -167,7 +173,8 @@ class _EditProfileState extends State<EditProfile> {
         backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
       backgroundColor: Color(0xFFD2EDE0),
-      body: Center(
+      body: SingleChildScrollView(
+        child: Center(
         child:Column(
           //mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo chiều dọc
           crossAxisAlignment: CrossAxisAlignment.center, // Căn giữa theo chiều ngang
@@ -177,7 +184,7 @@ class _EditProfileState extends State<EditProfile> {
                 InkWell(
                   onTap: () {
                     // Xử lý sự kiện
-                    _pickImage();
+                    //_pickImage();
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -189,7 +196,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     child: ClipOval(
                       child: Image.network(
-                        url,
+                        'https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd',
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
@@ -203,8 +210,16 @@ class _EditProfileState extends State<EditProfile> {
                   child: IconButton(
                     icon: Icon(Icons.edit),
                     color: Colors.white,
-                    onPressed: () {
+                    onPressed: ()async {
                       // Xử lý sự kiện khi nút chỉnh sửa được nhấn
+                       String? imageUrl = await pickAndUploadImageToFirebase();
+                        if (imageUrl != null) {
+                          url = imageUrl;
+                          print('link Ảnh: $imageUrl');
+                          print('link url:$url');
+                        } else {
+                          print('Image upload failed.');
+                        }
                     },
                   ),
                 )
@@ -312,6 +327,7 @@ class _EditProfileState extends State<EditProfile> {
                 onPressed: () {
                  //Sử lý sự kiện button edit-----------
                  setState(() {
+                  print('đây là urlz: $url');
                   editData();
                    // _resetFormData();
                   });
@@ -325,15 +341,42 @@ class _EditProfileState extends State<EditProfile> {
             ),
           ],
         )
+      ),
       )
+       
     );
   }
-     Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  //    Future<void> _pickImage() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
-    if (image != null) {
-      url = image.path;
-    }
+  //   if (image != null) {
+  //     url = image.path;
+  //   }
+  // }
+  
+  Future<String?> pickAndUploadImageToFirebase() async {
+  final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (file == null) return null;
+
+  Uint8List imageData = await File(file.path!).readAsBytes();
+  String fileName = DateTime.now().microsecondsSinceEpoch.toString();
+  Reference referenceRoot = FirebaseStorage.instance.ref();
+  Reference referenceDireImages = referenceRoot.child('images');
+  Reference referenceUpLoad = referenceDireImages.child(fileName);
+
+  try {
+    await referenceUpLoad.putData(imageData, SettableMetadata(contentType: 'image/png'));
+    
+    // Lấy đường dẫn URL của ảnh sau khi tải lên
+    String downloadUrl = await referenceUpLoad.getDownloadURL();
+    print('Download URL: $downloadUrl');
+    
+    return downloadUrl;
+  } catch (error) {
+    print('Error uploading image to Firebase Storage: $error');
+    // Xử lý lỗi nếu cần thiết
+    return null;
   }
+}
 }

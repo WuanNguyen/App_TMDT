@@ -64,6 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           infoTitle.add(element);
         }
       }
+      
       //   for(int i = 0 ; i< lst_users.length;i++)
       // {
       //   String UID = getUserUIDString();
@@ -95,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    String ID = getUserUIDString();
+    
     //---------------
     // void yourFunction() async {
     //   String? uid = await getUserUID();
@@ -107,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // }
     // yourFunction();
   
-
+  String ID = getUserUIDString();
     try{
      name = infoTitle[0][ID]['fullname'];
       url = infoTitle[0][ID]['url'];
@@ -135,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: ClipOval(
               child: Image.network(
-                url,
+                'https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd',
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
@@ -143,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 10),
-          Text(name),
+          Text(name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 124, 10, 103)),),
           // const Text(
           //   "Nguyễn Huân", style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),
           //   //  textAlign: TextAlign.center,
