@@ -1,3 +1,4 @@
+import 'package:doan_tmdt/api/firebase_api.dart';
 import 'package:doan_tmdt/firebase_options.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
 import 'package:doan_tmdt/screen/cart/cart_page.dart';
@@ -6,11 +7,14 @@ import 'package:doan_tmdt/screen/notification/notification_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:doan_tmdt/screen/login/login_page.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotification();
   runApp(const MyApp());
 }
 
@@ -26,7 +30,10 @@ class MyApp extends StatelessWidget {
       ),
      // home: LoginScreen()
      home: NotificationScreen(),
-    
+    navigatorKey: navigatorKey,
+    routes: {
+      '/noti':(context) => const NotificationScreen(),
+    },
     );
   }
 }

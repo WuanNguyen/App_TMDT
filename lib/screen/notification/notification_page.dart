@@ -1,4 +1,5 @@
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -56,6 +57,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     ),
   ];
   String url = '';
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -73,13 +76,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     leading: Image.network(
                       imageUrl,
                       width: 100.0,
-                      height: 200.0,
+                      height: 100.0,
                       fit: BoxFit.cover,
                       ),
                     title: Text(snapshot.child('title').value.toString(),style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 5.0),
                         Text(snapshot.child('description').value.toString(),style: TextStyle(fontSize: 15),),
                         SizedBox(height: 8.0),
                         Text(snapshot.child('date').value.toString(),style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
