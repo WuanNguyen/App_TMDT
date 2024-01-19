@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SearchProduct extends StatelessWidget {
   SearchProduct({super.key,img,required this.product});
   String img = 'assets/img/no_image.jpg';
-  Map product;
+  Map<String,dynamic> product;
   int amount = 1;
 
   @override
@@ -17,7 +17,7 @@ class SearchProduct extends StatelessWidget {
       child:Container(
         width: 349,
         height: 180,
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+        margin: EdgeInsets.fromLTRB(7, 0, 0, 10),
         padding: const EdgeInsets.fromLTRB(5, 20, 10, 10),
         alignment: Alignment.center,
         decoration: ShapeDecoration(

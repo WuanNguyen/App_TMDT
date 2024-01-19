@@ -1,8 +1,9 @@
 import 'package:doan_tmdt/model/drawer.dart';
-import 'package:doan_tmdt/screen/cart_page.dart';
-import 'package:doan_tmdt/screen/home_page.dart';
-import 'package:doan_tmdt/screen/notification_page.dart';
-import 'package:doan_tmdt/screen/profile_page.dart';
+import 'package:doan_tmdt/screen/cart/cart_page.dart';
+import 'package:doan_tmdt/screen/home/home_page.dart';
+import 'package:doan_tmdt/screen/notification/notification_page.dart';
+import 'package:doan_tmdt/screen/profile/profile_page.dart';
+import 'package:doan_tmdt/screen/profile/user.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -24,12 +25,32 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
       _currentIndex = value;
     });
   }
+  // lấy dữ liệu user
+  //--------------------------
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex],//! đổi tên file này thành screen 
-      drawer: const MyDrawer(), // Add the drawer here
+      appBar: AppBar(
+        title: const Text("Vietcomshoes",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 1),fontSize: 25,fontFamily:'Rufina'),),
+        actions: [
+          GestureDetector(
+            child: ClipOval(
+              child: Image.network(
+                "https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd",
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+              ),
+            ),
+            onTap: (){},
+          )
+        ],
+        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
+      ),
+      body: _screens[_currentIndex],
+      drawer: MyDrawer(), // Add the drawer here
+
       bottomNavigationBar: CurvedNavigationBar(
         
         color: const Color.fromARGB(255, 28, 80, 29),

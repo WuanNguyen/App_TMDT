@@ -4,7 +4,7 @@ class Product{
   final String name;
   final String category;
   final String desc;
-  final int price;
+  int price;
 
   Product({
     required this.name,
@@ -13,12 +13,13 @@ class Product{
     required this.price,
   });
 
-  factory Product.fromRTDB(Map<String,dynamic> data){
+  factory Product.fromSnapshot(DataSnapshot snapshot){
     return Product(
-      name: data['name'],
-      category: data['category'],
-      desc: data['desc'],
-      price: data['price'] as int
+      name: snapshot.child('name').value.toString(), 
+      category: snapshot.child('category').value.toString(), 
+      desc: snapshot.child('desc').value.toString(), 
+      price: int.parse(snapshot.child('price').value.toString())
     );
   }
+  toJson(){}
 }

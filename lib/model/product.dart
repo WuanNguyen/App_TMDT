@@ -1,9 +1,10 @@
+import 'package:doan_tmdt/model/product_model.dart';
 import 'package:flutter/material.dart';
 
-class Product extends StatelessWidget {
-  Product({super.key,img,required this.product});
+class ProductItem extends StatelessWidget {
+  ProductItem({super.key,img,required this.product});
   String img = 'assets/img/no_image.jpg';
-  Map product;
+  Product product;
   // String name;
   // String category = "category";
   // int price = 1000000;//? min = 1, max = ?
@@ -44,22 +45,23 @@ class Product extends StatelessWidget {
             Row(
               children: [
                 Padding(padding: EdgeInsets.fromLTRB(20, 0, 0, 0)),
-                Text(product['name'],style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),)
+                Text(product.name,style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),)
             ],),
             Row(
               children: [
                 Padding(padding: EdgeInsets.fromLTRB(20, 0, 0, 0)),
-                Text(product['category'],style: TextStyle(fontSize: 10,color: Colors.white,fontWeight: FontWeight.w100),)
+                Text(product.category,style: TextStyle(fontSize: 10,color: Colors.white,fontWeight: FontWeight.w100),)
             ],),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Giá: "+ product['price'].toString() + " VND",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
+                Text("Giá: "+ product.price.toString() + " VND",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
             ],),
             GestureDetector(
               onTap: (){
                 //todo: thêm sản phẩm vào giỏ 
+                
               },
               child: Container(
                 width: 152,

@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:doan_tmdt/model/bottom_appar.dart';
-import 'package:doan_tmdt/screen/login_page.dart';
+import 'package:doan_tmdt/screen/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {

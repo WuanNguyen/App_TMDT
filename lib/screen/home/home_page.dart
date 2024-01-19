@@ -1,7 +1,11 @@
 import 'package:doan_tmdt/model/drawer.dart';
+import 'package:doan_tmdt/model/product.dart';
 import 'package:doan_tmdt/model/product_list.dart';
+import 'package:doan_tmdt/model/sale_product.dart';
 import 'package:doan_tmdt/model/sale_product_list.dart';
-import 'package:doan_tmdt/model/false_search_bar.dart';
+import 'package:doan_tmdt/model/search_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,20 +16,84 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String diachi = "65 Huỳnh Thúc Khánh, P.Bến Nghé, Q.11";
+  //--------------------------------------------------------
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+ String getUserUIDString() {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  if (user != null) {
+    // Kiểm tra xem user có khác null không trước khi truy cập thuộc tính uid
+    String userUID = user.uid;
+    return userUID;
+  }
+  // Trả về một giá trị mặc định hoặc chuỗi trống tùy thuộc vào yêu cầu của bạn
+  return ''; // hoặc return 'Giá trị mặc định';
+}
+//------------------------------------------------------------
+  final DatabaseReference _databaseReference = FirebaseDatabase(
+    databaseURL:
+        'https://tmdt-bangiay-default-rtdb.asia-southeast1.firebasedatabase.app/',
+  ).ref();
+  
+   List<Map<dynamic, dynamic>> lst_users = [];
+   List<Map<dynamic, dynamic>> infoTitle = [];
+
+
+  Future<void> _loadData() async {
+    try {
+      DatabaseEvent _event = await _databaseReference.once();
+      DataSnapshot? _dataSnapshot = _event.snapshot;
+      if (_dataSnapshot != null && _dataSnapshot.value != null) {
+        Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['infomation'];
+        data.forEach((key, value) {
+          lst_users.add(value);
+        });
+      }
+      String UID = getUserUIDString();
+      for( var element in lst_users)
+      {
+       print("Đây là key: " + element.keys.toString());
+       String UIDS = "($UID)";
+       print("Đây là UID: "+ UIDS);
+       
+        if(element.keys.toString() == UIDS){
+          infoTitle.add(element);
+        }
+      }
+      
+      setState(() {
+        
+      });
+    } catch (e) {
+      print(e.toString());
+      
+    }
+    print(lst_users);
+     print(infoTitle);
+  }
+  
+  String diachi = '';
+   
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadData();
+  }
+//-----------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+    //--------------------------------------------------------
+    String ID = getUserUIDString();
+    try{
+      diachi = infoTitle[0][ID]['address'];
+    }catch(e){
+      print(e.toString());
+    }
+    //--------------------------------------------------
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Vietcomshoes",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 1),fontSize: 25,fontFamily:'Rufina'),),
-        actions: [
-          GestureDetector(
-            child:Image.asset('assets/img/user.png',height: 50,width: 50,),
-            onTap: (){},
-          )
-        ],
-        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
-      ),
       drawer: MyDrawer(),
       body: Container(
         color: const Color.fromRGBO(210, 237, 224, 1),

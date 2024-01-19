@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SaleProduct extends StatelessWidget {
-  SaleProduct({super.key,img,name,DesktopTextSelectionToolbar});
+  SaleProduct({super.key,img,title,subtitle});
   final String img = "assets/img/no_image.jpg";
-  final String name = "name";
-  final String desc = "description";
+  final String title = "title";
+  final String subtitle = "subtitle";
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +53,8 @@ class SaleProduct extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.white),),
-                Text(desc,style: const TextStyle(fontSize: 10,color: Colors.white)),
+                Text(title,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.white),),
+                Text(subtitle,style: const TextStyle(fontSize: 10,color: Colors.white)),
               ],
             )
           ],
