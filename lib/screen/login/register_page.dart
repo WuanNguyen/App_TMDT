@@ -1,6 +1,10 @@
 // màng hình đăng kí
+import 'package:doan_tmdt/auth/firebase_auth.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
+import 'package:doan_tmdt/model/err_dialog.dart';
 import 'package:doan_tmdt/screen/login/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -11,6 +15,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  var _fireauth = FirebAuth();
+
   final TextEditingController email =  TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController cpassword = TextEditingController();
@@ -110,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FilledButton(
-                      onPressed: (){
+                      onPressed: () {
                         if(email.text.isEmpty){
                           setState(() {  
                           TBEmail = "Vui lòng nhập Email";
@@ -141,9 +147,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           TBCPassword = "";
                           });
                         }
-                        if(email.text=="Huan" && password.text=="123" && cpassword.text == password.text){
+                        if( cpassword.text != password.text)
+                        {
+                          MsgDialog.ShowDialog(context, 'sign in', 'Xác nhận mật khẩu thất bại');
+                        }else{
+                          // --------------------------------------
+                          _fireauth.signUp(email.text, password.text,(){
+                            User? user = FirebaseAuth.instance.currentUser;
+                            if(user != null)
+                            {
+                              String uid = user.uid;
+                              DatabaseReference infos = FirebaseDatabase.instance.reference().child('infomation').child(uid);
+                              //String infoId = infos.push().key!;
+                              infos.child(uid).set({
+                                'fullname':'',
+                                'email':'',
+                                'phone':'',
+                                'address':'',
+                                'url':'blob:http://localhost:50227/55ae82ca-452f-48db-a872-60a778fc3fec'
+                              });
+                            }
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
+                        });
                         }
+                         
+                        // if(email.text=="Huan" && password.text=="123" && cpassword.text == password.text){
+                        //   Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
+                        // }
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(120, 120, 120, 1)),
@@ -153,6 +183,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     //Nút đăng ký
                     GestureDetector(
                       onTap: () {
+                        //
+                       
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                       },
                       child: const Text("Đăng nhập",style: TextStyle(fontWeight: FontWeight.w500,color: Color.fromRGBO(210, 237, 224, 1)),)
@@ -168,4 +200,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       
     );
   }
+  // void signUp(String email, String password,Function onSuccess)
+  // {
+  //   _fireauth.signUp(email, password, onSuccess);
+  // }
 }

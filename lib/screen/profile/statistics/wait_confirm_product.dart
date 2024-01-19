@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
 class WaitConfirmProduct extends StatefulWidget {
@@ -8,13 +10,15 @@ class WaitConfirmProduct extends StatefulWidget {
 }
 
 class _WaitConfirmProductState extends State<WaitConfirmProduct> {
+  final wait_comfirm = FirebaseDatabase.instance.ref('wait_comfirm_product/tEB5GubwFQOcoohIYwdGns39N933');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFD2EDE0),
       appBar: AppBar(
-        title: Text('Chờ xác nhận',style: TextStyle(color: Colors.white),),
+        title: Text('Chờ xác nhận',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
           onPressed: () {
             // Xử lý khi nút arrow_back được nhấn
             Navigator.pop(context);
@@ -22,61 +26,42 @@ class _WaitConfirmProductState extends State<WaitConfirmProduct> {
         ),
         backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
       ),
-      body: Center(
-        child: Container(
-           width: MediaQuery.of(context).size.width, 
-        height: MediaQuery.of(context).size.height,
-          color: Color(0xFFD2EDE0),
-          child: Column(
-         // mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
           children: [
             SizedBox(height: 15,),
-            Container(
-              width: MediaQuery.of(context).size.width / 1.2,
-              height: 150,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(59, 122, 91, 1),
-                borderRadius: BorderRadius.circular(10.0), // Điều chỉnh giá trị này để thay đổi độ cong của bo góc
+            Expanded(
+              child: FirebaseAnimatedList(query: wait_comfirm, itemBuilder:(BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
+                Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic> ;
+                String imageUrl = values['imageUrl'];
+                return Card(
+                  color: Color.fromRGBO(59, 122, 91, 1),
+                  child: ListTile(
+                    leading: Image.network(
+                      imageUrl,
+                      height: 120,
+                      width: 105,
+                      fit: BoxFit.cover,
+                      ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(onPressed: null, child: Text('Hủy đặt hàng',style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
+                        Text(snapshot.child('name').value.toString(),style: TextStyle(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 8.0),
+                        Row(children: [SizedBox(width: 20,), Text(snapshot.child('desc').value.toString(),style: TextStyle(color: Colors.white),),SizedBox(width: 40,),Text('x'+ snapshot.child('quantity').value.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)],),
+                        SizedBox(height: 8.0),
+                        Text('Giá: '+ snapshot.child('price').value.toString() + ' VNĐ',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
+                        Text('Thành tiền: '+snapshot.child('total').value.toString() + ' VNĐ',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
+                      ],
+                    ),
+                  ),
+                );
+              } 
               ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Container(
-              height: 100,
-              width: 100,
-              margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
-              clipBehavior: Clip.antiAlias,
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
-                )
-              ),
-              child: Image.asset('assets/img/no_image.jpg',height: 125,width: 125,),
-               ),
-               Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ElevatedButton(onPressed: null, child: Text('Hủy đặt hàng',style: TextStyle(color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
-                  Text('Dép tổ ong',style: TextStyle(fontSize: 24,color: Colors.white),),
-                 
-                  Row(children: [SizedBox(width: 25,), Text('vũ khí của má',style: TextStyle(color: Colors.white),),SizedBox(width: 40,),Text('x1',style: TextStyle(color: Colors.white),)],),
-                  Text('giá: 1000000',style: TextStyle(fontSize: 15,color: Colors.white),),
-                  Text('Thành tiền: 1000000',style: TextStyle(fontSize: 15,color: Colors.white),),
-                ],
-               )
-                  ],
-                ),
-              ),
-              
-            )
-
-              
+            ),
+            SizedBox(height: 20,),
           ],
-        ),
-        ),
-      ),
+        )
     );
   }
 }
