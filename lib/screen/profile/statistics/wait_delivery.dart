@@ -34,21 +34,33 @@ class _WaitDeliveryState extends State<WaitDelivery> {
                 Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic> ;
                 String imageUrl = values['imageUrl'];
                 return Card(
+                  margin: EdgeInsets.all(20),
                   color: Color.fromRGBO(59, 122, 91, 1),
                   child: ListTile(
-                    leading: Image.network(
+                    leading: Container(
+                      height: 100,
+                      width: 100,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        )
+                      ),
+                      child: Image.network(
                       imageUrl,
-                      height: 120,
-                      width: 105,
+                      width: 100.0,
+                      height: 200.0,
                       fit: BoxFit.cover,
                       ),
+                    ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ElevatedButton(onPressed: null, child: Text('Xem chi tiết',style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromRGBO(59, 122, 91, 1),),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(203, 222, 213, 1)),),),
                         Text(snapshot.child('name').value.toString(),style: TextStyle(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold),),
                         SizedBox(height: 8.0),
-                        Row(children: [SizedBox(width: 20,), Text(snapshot.child('desc').value.toString(),style: TextStyle(color: Colors.white),),SizedBox(width: 40,),Text('x'+ snapshot.child('quantity').value.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)],),
+                        Row(children: [SizedBox(width: 10,), Text(snapshot.child('desc').value.toString(),style: TextStyle(color: Colors.white),),SizedBox(width: 20,),Text('x'+ snapshot.child('quantity').value.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)],),
                         SizedBox(height: 8.0),
                         Text('Giá: '+ snapshot.child('price').value.toString() + ' VNĐ',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),
                         Text('Thành tiền: '+snapshot.child('total').value.toString() + ' VNĐ',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),),

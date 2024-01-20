@@ -46,14 +46,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic> ;
                 String imageUrl = values['imageUrl'];
                 return Card(
+                  margin: EdgeInsets.all(10),
                   color: Colors.green[200],
                   child: ListTile(
-                    leading: Image.network(
+                    leading: Container(
+                      height: 100,
+                      width: 100,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        )
+                      ),
+                      child: Image.network(
                       imageUrl,
                       width: 100.0,
                       height: 200.0,
                       fit: BoxFit.cover,
                       ),
+                    ),
                     title: Text(snapshot.child('title').value.toString(),style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
