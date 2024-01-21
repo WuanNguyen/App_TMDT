@@ -37,7 +37,7 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
           GestureDetector(
             child: ClipOval(
               child: Image.network(
-                "https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd",
+                "https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2Flogodoan.jpg?alt=media&token=18773b3e-4f0a-4aef-a5fd-84c1266c1447",
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,

@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:doan_tmdt/model/err_dialog.dart';
 import 'package:doan_tmdt/screen/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -24,6 +25,8 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController phone = TextEditingController();
   final TextEditingController address = TextEditingController();
   String url = '';
+  String newURL ="";
+  String linkanh = '';
 
    final DatabaseReference _databaseReference = FirebaseDatabase(
     databaseURL:
@@ -54,17 +57,11 @@ class _EditProfileState extends State<EditProfile> {
           infoTitle.add(element);
         }
       }
-      //   for(int i = 0 ; i< lst_users.length;i++)
-      // {
-      //   String UID = getUserUIDString();
-      //   if(lst_users[i].keys == UID)
-      //   {
-      //     infoTitle.add(lst_users[i]);
-      //   }
-      // }
+     
       setState(() {
         
       });
+      updateUI();
     } catch (e) {
       print(e.toString());
       
@@ -88,35 +85,24 @@ class _EditProfileState extends State<EditProfile> {
   // Trả về một giá trị mặc định hoặc chuỗi trống tùy thuộc vào yêu cầu của bạn
   return ''; // hoặc return 'Giá trị mặc định';
 }
-//--------------------------------------------------------------------
-  //load data
-  // Future<void> _loadData() async {
-  //   try {
-  //     DatabaseEvent _event = await _databaseReference.once();
-  //     DataSnapshot? _dataSnapshot = _event.snapshot;
-  //     if (_dataSnapshot != null && _dataSnapshot.value != null) {
-  //       Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['users'];
-  //       data.forEach((key, value) {
-  //         Lst_user.add(value);
-  //       });
-  //       // print(lst_cat);
-  //       // print(lst_cat[0]['namepro']);
-  //     }
-  //     setState(() {
-        
-  //     });
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
-  // edit data
-  
-  //     url = infoTitle[0][ID]['url'];
-  //------------------------------
+bool isValidPhoneNumber(String input) {
+    final RegExp regex = RegExp(r'^[0-9]{10}$');
+    return regex.hasMatch(input);
+  }
+ bool isValidGmail(String input) {
+    // Biểu thức chính quy kiểm tra xem chuỗi là địa chỉ email Gmail hợp lệ hay không
+    final RegExp regex = RegExp(r'^[a-zA-Z0-9._%+-]+@gmail\.com$');
+    return regex.hasMatch(input);
+  }
   
   void editData() async {
     String ID = getUserUIDString();
     print("đây là ID"+ID);
+    
+    setState(() {
+      if(newURL!='')
+       url = newURL;
+  });
 
     await _databaseReference.child('infomation').child(ID).child(ID).set({
       'fullname': fullname.text,
@@ -127,6 +113,16 @@ class _EditProfileState extends State<EditProfile> {
      }    
     );
   }
+  void updateUI() {
+  String ID = getUserUIDString();
+  setState(() {
+    fullname.text = infoTitle[0][ID]['fullname'];
+    phone.text = infoTitle[0][ID]['phone'];
+    email.text = infoTitle[0][ID]['email'];
+    address.text = infoTitle[0][ID]['address'];
+    url = infoTitle[0][ID]['url'];
+  });
+}
   //------------------------------------
   // void editData() async {
   //   await _databaseReference.child('users').child('user0').child('info').set({
@@ -148,11 +144,14 @@ class _EditProfileState extends State<EditProfile> {
   }
   @override
   Widget build(BuildContext context) {
-    String url = '';
     String ID = getUserUIDString();
     try{
     // name = infoTitle[0][ID]['fullname'];
-      url = infoTitle[0][ID]['url'];
+      // fullname.text = infoTitle[0][ID]['fullname'];
+      // phone.text = infoTitle[0][ID]['phone'];
+      // email.text = infoTitle[0][ID]['email'];
+      // address.text = infoTitle[0][ID]['address'];
+      // url = infoTitle[0][ID]['url'];
       //name = infoTitle[0]['fullname'];
       // name = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['fullname'];
       // url = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['url'];
@@ -182,8 +181,20 @@ class _EditProfileState extends State<EditProfile> {
             Stack(
               children: [
                 InkWell(
-                  onTap: () {
+                  onTap: () async{
                     // Xử lý sự kiện
+                    String? imageUrl = await pickAndUploadImageToFirebase();
+                        if (imageUrl != null) {
+                          setState(() {
+                            newURL = imageUrl;
+                          });
+                          
+                          print('link Ảnh: $imageUrl');
+                          print('link url:$url');
+                          print('new URl $newURL');
+                        } else {
+                          print('Image upload failed.');
+                        }
                     //_pickImage();
                   },
                   child: Container(
@@ -195,12 +206,17 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     ),
                     child: ClipOval(
-                      child: Image.network(
-                        'https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd',
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                      ),
+                     child: url != null && url.isNotEmpty
+                      ? Image.network(
+                          newURL == '' ? url : newURL,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        )
+                      : Container(
+                          // Thay thế bằng một widget hoặc hiệu ứng khác khi không có URL hợp lệ
+                          color: Colors.grey, // Ví dụ: Màu xám
+                        ),
                     ),
                   ),
                 ),
@@ -214,9 +230,13 @@ class _EditProfileState extends State<EditProfile> {
                       // Xử lý sự kiện khi nút chỉnh sửa được nhấn
                        String? imageUrl = await pickAndUploadImageToFirebase();
                         if (imageUrl != null) {
-                          url = imageUrl;
+                          setState(() {
+                            newURL = imageUrl;
+                          });
+                          
                           print('link Ảnh: $imageUrl');
                           print('link url:$url');
+                          print('new URl $newURL');
                         } else {
                           print('Image upload failed.');
                         }
@@ -325,16 +345,81 @@ class _EditProfileState extends State<EditProfile> {
                     backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(46, 91, 69, 1))
                   ),
                 onPressed: () {
-                 //Sử lý sự kiện button edit-----------
-                 setState(() {
-                  print('đây là urlz: $url');
-                  editData();
-                   // _resetFormData();
+                  setState(() {
+                    print('đây là urlz: $url');
+                    if(fullname.text == '' || phone.text == '' || email.text == '' || address.text == ''){
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Infomation',style: TextStyle(color: const Color.fromARGB(255, 207, 119, 112))),
+                            content: Text('Vui lòng điền đủ thông tin',style: TextStyle(color:Colors.white)),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Đóng dialog
+                                },
+                                child: Text('OK',style: TextStyle(color: Color.fromARGB(255, 249, 249, 249))),
+                              ),
+                            ],
+                            backgroundColor: Color.fromRGBO(46, 91, 69, 1),
+                          );
+                          
+                        },
+                      );
+                    }else if(isValidPhoneNumber(phone.text) == false)
+                    {
+                       showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Infomation',style: TextStyle(color: const Color.fromARGB(255, 207, 119, 112))),
+                            content: Text('Số điện thoại không hợp lệ',style: TextStyle(color:Colors.white)),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Đóng dialog
+                                },
+                                child: Text('OK',style: TextStyle(color: Color.fromARGB(255, 249, 249, 249))),
+                              ),
+                            ],
+                            backgroundColor: Color.fromRGBO(46, 91, 69, 1),
+                          );
+                          
+                        },
+                      );
+
+                    }else if(isValidGmail(email.text)== false){
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Infomation',style: TextStyle(color: const Color.fromARGB(255, 207, 119, 112))),
+                            content: Text('Email không hợp lệ',style: TextStyle(color:Colors.white)),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Đóng dialog
+                                },
+                                child: Text('OK',style: TextStyle(color: Color.fromARGB(255, 249, 249, 249))),
+                              ),
+                            ],
+                            backgroundColor: Color.fromRGBO(46, 91, 69, 1),
+                          );
+                          
+                        },
+                      );
+                    }else{
+                      if(newURL != '')
+                        url = newURL;
+                         print('đây là urlz sau khi gán: $url');
+                         editData();
+                        Navigator.pop(context);
+                     
+                    }
                   });
-                  Navigator.pop(context);
-                  // Navigator.push(context, 
-                  // MaterialPageRoute(builder: (context) => ProfileScreen()));
                 },
+
                 child: Text('Cập nhật thông tin',style: TextStyle(color: Color.fromRGBO(252, 255, 254, 1)),),
               ),
               ],
@@ -356,7 +441,7 @@ class _EditProfileState extends State<EditProfile> {
   // }
   
   Future<String?> pickAndUploadImageToFirebase() async {
-  final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+  final file =  await ImagePicker().pickImage(source: ImageSource.gallery);
   if (file == null) return null;
 
   Uint8List imageData = await File(file.path!).readAsBytes();

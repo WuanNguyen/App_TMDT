@@ -152,23 +152,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           MsgDialog.ShowDialog(context, 'sign in', 'Xác nhận mật khẩu thất bại');
                         }else{
                           // --------------------------------------
-                          _fireauth.signUp(email.text, password.text,(){
-                            User? user = FirebaseAuth.instance.currentUser;
-                            if(user != null)
-                            {
-                              String uid = user.uid;
-                              DatabaseReference infos = FirebaseDatabase.instance.reference().child('infomation').child(uid);
-                              //String infoId = infos.push().key!;
-                              infos.child(uid).set({
-                                'fullname':'',
-                                'email':'',
-                                'phone':'',
-                                'address':'',
-                                'url':'blob:http://localhost:50227/55ae82ca-452f-48db-a872-60a778fc3fec'
+                          try {
+                              _fireauth.signUp(email.text, password.text, () async {
+                                User? user = FirebaseAuth.instance.currentUser;
+                                if (user != null) {
+                                  String uid = user.uid;
+                                  DatabaseReference infos = FirebaseDatabase.instance.reference().child('infomation').child(uid);
+                                  await infos.child(uid).set({
+                                    'fullname': 'YourName',
+                                    'email': 'your_email@gmail.com',
+                                    'phone': '',
+                                    'address': 'your_address',
+                                    'url': 'https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2Favatarface.jpg?alt=media&token=7da6a34c-02df-4551-b67e-66058d33a72f'
+                                  });
+                                }
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const MyBottomNavigator()));
+                              }, (msg) {
+                                // Xử lý lỗi từ hàm signUp
+                                MsgDialog.ShowDialog(context, 'Sign-In', msg);
                               });
+                            } catch (e) {
+                              // Xử lý lỗi khi gọi hàm signUp
+                              print('Error during sign-up: $e');
+                              MsgDialog.ShowDialog(context, 'Sign-In', 'An error occurred during sign-up: $e');
                             }
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
-                        });
+
                         }
                          
                         // if(email.text=="Huan" && password.text=="123" && cpassword.text == password.text){

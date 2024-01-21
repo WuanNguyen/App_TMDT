@@ -57,22 +57,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       for( var element in lst_users)
       {
        print("Đây là key: " + element.keys.toString());
-       String UIDS = "($UID)";
+       String UIDS = "($UID)"; 
        print("Đây là UID: "+ UIDS);
        
         if(element.keys.toString() == UIDS){
           infoTitle.add(element);
         }
       }
-      
-      //   for(int i = 0 ; i< lst_users.length;i++)
-      // {
-      //   String UID = getUserUIDString();
-      //   if(lst_users[i].keys == UID)
-      //   {
-      //     infoTitle.add(lst_users[i]);
-      //   }
-      // }
+
       setState(() {
         
       });
@@ -80,12 +72,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print(e.toString());
       
     }
-    print(lst_users);
+    print(lst_users); 
      print(infoTitle);
   }
   
   String name = '';
-   String url = '';
+  String url = '';
    
 
   @override
@@ -94,24 +86,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     _loadData();
   }
+  
   @override
   Widget build(BuildContext context) {
     
-    //---------------
-    // void yourFunction() async {
-    //   String? uid = await getUserUID();
-    //   if (uid != null) {
-    //     setState(() {
-    //       name = uid;
-    //     });
-    //   }
-    // }
-    // yourFunction();
   
   String ID = getUserUIDString();
     try{
      name = infoTitle[0][ID]['fullname'];
-      url = infoTitle[0][ID]['url'];
+     url = infoTitle[0][ID]['url'];
       //name = infoTitle[0]['fullname'];
       // name = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['fullname'];
       // url = lst_users[0]['-NoDL5o87-Gj7rEwKmvB']['url'];
@@ -130,19 +113,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: const Color.fromARGB(255, 239, 190, 190), // Màu của viền
-                width: 3.0, // Độ rộng của viền
+                color: const Color.fromARGB(255, 239, 190, 190),
+                width: 3.0,
               ),
             ),
             child: ClipOval(
-              child: Image.network(
-                'https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
+              child: url != null && url.isNotEmpty
+                  ? Image.network(
+                      url,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    )
+                  : Container(
+                      // Thay thế bằng một widget hoặc hiệu ứng khác khi không có URL hợp lệ
+                      color: Colors.grey, // Ví dụ: Màu xám
+                    ),
             ),
           ),
+
           const SizedBox(height: 10),
           Text(name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 124, 10, 103)),),
           // const Text(

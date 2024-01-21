@@ -2,6 +2,7 @@
 
 import 'package:doan_tmdt/auth/firebase_auth.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
+import 'package:doan_tmdt/model/err_dialog.dart';
 import 'package:doan_tmdt/screen/login/forgot_password_page.dart';
 import 'package:doan_tmdt/screen/login/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -117,9 +118,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         }
                         // đăng nhập thành công
-                        _fireauth1.signIn(email.text, password.text, (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
-                        });
+                        try{
+                            _fireauth1.signIn(email.text, password.text, (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
+                          },(mss){
+                            MsgDialog.ShowDialog(context, 'Sign-In', mss);
+                          });
+                        }catch(err){
+                           print('Error during sign-in: $err');
+                           MsgDialog.ShowDialog(context, 'Sign-In', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+                        }
                         // if(email.text=="Huan"&& password.text=="123"){
                         //   Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyBottomNavigator()));
                         // }

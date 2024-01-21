@@ -1,6 +1,8 @@
 import 'package:doan_tmdt/screen/cart/cart_page.dart';
 import 'package:doan_tmdt/screen/home/home_page.dart';
 import 'package:doan_tmdt/screen/login/login_page.dart';
+import 'package:doan_tmdt/screen/notification/notification_page.dart';
+import 'package:doan_tmdt/screen/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,11 @@ class _MyDrawerState extends State<MyDrawer> {
   
   //--------------------------------------------------------
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  int _currentIndex = 0;
 
  String getUserUIDString() {
   User? user = FirebaseAuth.instance.currentUser;
+   
 
   if (user != null) {
     // Kiểm tra xem user có khác null không trước khi truy cập thuộc tính uid
@@ -76,6 +80,7 @@ class _MyDrawerState extends State<MyDrawer> {
   String name = '';
    String url = '';
    
+ final List _screens = [HomeScreen(), CartScreen(), NotificationScreen(), ProfileScreen()];
 
   @override
   void initState() {
@@ -125,14 +130,19 @@ class _MyDrawerState extends State<MyDrawer> {
                 Container(
                   // color: Colors.amber,
                   padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: ClipOval(
-                    child: Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/tmdt-bangiay.appspot.com/o/images%2F1705586798943817?alt=media&token=93f25780-583d-4118-9085-adef8d3dc5fd',
+                 child: ClipOval(
+              child: url != null && url.isNotEmpty
+                  ? Image.network(
+                      url,
+                      width: 100,
+                      height: 100,
                       fit: BoxFit.cover,
-                      width: 75,
-                      height: 75,
+                    )
+                  : Container(
+                      // Thay thế bằng một widget hoặc hiệu ứng khác khi không có URL hợp lệ
+                      color: Colors.grey, // Ví dụ: Màu xám
                     ),
-                  ),
+            ),
                 ),
                 const SizedBox(height: 5),
                 Container(
@@ -141,7 +151,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(210, 237, 224, 1)),
+                        color: Color.fromARGB(255, 248, 245, 247)),
                   ),
                 ),
               ],
@@ -154,10 +164,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   Padding(padding: EdgeInsets.only(left:8)),
                   Text('Home')]),
               onTap: () {
-                Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              );
+                 setState(() {
+                _currentIndex = 0;
+              });
+              Navigator.pop(context);
               },
             ),
             ListTile(
@@ -167,10 +177,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   Padding(padding:EdgeInsets.only(left:8)),
                   Text('Cart')]),
               onTap: () {
-                Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const CartScreen()),
-              );
+                setState(() {
+                  _currentIndex = 1;
+                });
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -180,10 +190,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   Padding(padding:EdgeInsets.only(left:8)),
                   Text('Notification')]),
               onTap: () {//
-                Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const CartScreen()),
-              );
+                setState(() {
+                  _currentIndex = 2;
+                });
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -193,10 +203,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   Padding(padding:EdgeInsets.only(left:8)),
                   Text('Profile')]),
               onTap: () {
-                Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const CartScreen()),
-              );
+                  setState(() {
+                  _currentIndex = 3;
+                });
+                Navigator.pop(context);
               },
             ),
             const Divider(
