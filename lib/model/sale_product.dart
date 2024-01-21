@@ -1,17 +1,17 @@
+import 'package:doan_tmdt/model/product_model.dart';
+import 'package:doan_tmdt/screen/home/product_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class SaleProduct extends StatelessWidget {
-  SaleProduct({super.key,img,title,subtitle});
-  final String img = "assets/img/no_image.jpg";
-  final String title = "title";
-  final String subtitle = "subtitle";
+class SaleProductItem extends StatelessWidget {
+  SaleProductItem({super.key,required this.pro});
+  Product pro;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
       //todo: chức năng nút
-
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen(pro: pro)));
       },
       //* thông tin sale
       child: Container(
@@ -47,14 +47,14 @@ class SaleProduct extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)
                 )
               ),
-              child: Image.asset(img,width: 50,height: 50,fit: BoxFit.fill,),
+              child: Image.network(pro.img,width: 50,height: 50,fit: BoxFit.fill,),
             ),
             const Padding(padding: EdgeInsets.all(5)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.white),),
-                Text(subtitle,style: const TextStyle(fontSize: 10,color: Colors.white)),
+                Text("Giảm ${pro.price - pro.sale_price} VND",style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.white),),
+                Text(pro.sale_desc,style: const TextStyle(fontSize: 10,color: Colors.white)),
               ],
             )
           ],

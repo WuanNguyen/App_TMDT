@@ -32,24 +32,8 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      
       height: 285 * (pro.length/2).ceil().toDouble(),
-      child: 
-      // FirebaseAnimatedList(
-      //   physics: const NeverScrollableScrollPhysics(),
-      //   query: _dbRef, 
-      //   itemBuilder: (context, snapshot, animation, index) {
-      //     Map product = snapshot.value as Map;
-      //     product['key'] = snapshot.key;
-          
-      //     return Row(
-      //          children: [ProductItem(product: product,)
-      //          ],);
-      //   }),
-      
-
-
-      ListView.builder(
+      child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         itemCount: (pro.length / 2).ceil(),
         itemBuilder: (context,index){

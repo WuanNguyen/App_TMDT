@@ -1,6 +1,10 @@
 import 'package:doan_tmdt/firebase_options.dart';
 import 'package:doan_tmdt/model/bottom_appar.dart';
+import 'package:doan_tmdt/model/product_list.dart';
+import 'package:doan_tmdt/model/sale_product_list.dart';
+import 'package:doan_tmdt/model/search_product_list.dart';
 import 'package:doan_tmdt/screen/cart/cart_page.dart';
+import 'package:doan_tmdt/screen/home/home_page.dart';
 import 'package:doan_tmdt/screen/home/product_detail_page.dart';
 import 'package:doan_tmdt/screen/home/search_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +20,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

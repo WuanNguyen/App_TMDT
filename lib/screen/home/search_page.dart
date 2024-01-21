@@ -15,9 +15,12 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tìm kiếm sản phẩm",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 0.8),fontWeight: FontWeight.bold),),
-        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56), 
+        child: AppBar(
+          title: const Text("Tìm kiếm sản phẩm",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 0.8),fontWeight: FontWeight.bold),),
+          backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -69,7 +72,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            SearchProductList(search: search,),
+             SearchProductList(search: ""),
           ],
         ),
       ),

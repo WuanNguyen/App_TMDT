@@ -1,4 +1,5 @@
 import 'package:doan_tmdt/model/product_model.dart';
+import 'package:doan_tmdt/screen/home/product_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatelessWidget {
@@ -14,6 +15,7 @@ class ProductItem extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         //todo: dẫn tới chi tiết sản phẩm
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen(pro: product)));
         
       },
       child: Container(
@@ -40,7 +42,7 @@ class ProductItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)
                 )
               ),
-              child: Image.asset(img,height: 125,width: 125,),
+              child: Image.network(product.img,height: 125,width: 125,),
             ),
             Row(
               children: [
@@ -56,18 +58,18 @@ class ProductItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Giá: "+ product.price.toString() + " VND",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
+                Text("Giá:${product.true_price} VND",style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)
             ],),
             GestureDetector(
               onTap: (){
                 //todo: thêm sản phẩm vào giỏ 
-                
+                print("Send ${product.name} to cart");
               },
               child: Container(
                 width: 152,
                 height: 40,
                 margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                padding: EdgeInsets.fromLTRB(12, 10, 12, 10),
                 decoration: ShapeDecoration(
                   color:Color.fromRGBO(210, 237, 224, 1),
                   shape: RoundedRectangleBorder(
