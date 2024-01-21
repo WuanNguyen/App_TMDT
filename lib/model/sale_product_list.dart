@@ -36,9 +36,7 @@ final Query _dbRef = FirebaseDatabase.instance.ref().child('products');
         scrollDirection: Axis.horizontal,
         itemCount: pro.length,
         itemBuilder: (context,index){
-          print(pro[index].sale_price);
-          print(pro[index].sale_price !=0);
-          if(pro[index].sale_price !=0){
+          if(pro[index].sale_price!=0){
             return Row(
               children: [
                 SaleProductItem(pro: pro[index],),
