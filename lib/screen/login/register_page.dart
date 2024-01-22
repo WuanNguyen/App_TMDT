@@ -176,7 +176,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               print('Error during sign-up: $e');
                               MsgDialog.ShowDialog(context, 'Sign-In', 'An error occurred during sign-up: $e');
                             }
-
                         }
                          
                         // if(email.text=="Huan" && password.text=="123" && cpassword.text == password.text){

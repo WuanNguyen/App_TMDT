@@ -27,6 +27,7 @@ class _MyDrawerState extends State<MyDrawer> {
   User? user = FirebaseAuth.instance.currentUser;
    
 
+
   if (user != null) {
     // Kiểm tra xem user có khác null không trước khi truy cập thuộc tính uid
     String userUID = user.uid;
@@ -82,6 +83,7 @@ class _MyDrawerState extends State<MyDrawer> {
    
  final List _screens = [HomeScreen(), CartScreen(), NotificationScreen(), ProfileScreen()];
 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -136,6 +138,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       url,
                       width: 100,
                       height: 100,
+
                       fit: BoxFit.cover,
                     )
                   : Container(

@@ -10,13 +10,18 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController search = TextEditingController(text:"");
+
+  TextEditingController searchController = TextEditingController(text:"");
+  String search="";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tìm kiếm sản phẩm",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 0.8),fontWeight: FontWeight.bold),),
-        backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56), 
+        child: AppBar(
+          title: const Text("Tìm kiếm sản phẩm",style: TextStyle(color: Color.fromRGBO(210, 237, 224, 0.8),fontWeight: FontWeight.bold),),
+          backgroundColor: const Color.fromRGBO(46, 91, 69, 1),
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -42,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 width: MediaQuery.of(context).size.width/5,
                 height: 1,
                 child:SearchBar(
-                  controller: search,
+                  controller: searchController,
                   hintText: "Tìm kiếm",
                   hintStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
                   backgroundColor: MaterialStateProperty.all(Color.fromRGBO(210, 237, 224, 0.8),), //mau thanh search
@@ -52,19 +57,23 @@ class _SearchScreenState extends State<SearchScreen> {
                       icon: const Icon(Icons.close,color: Colors.white,),
                       onPressed: (){
                         setState(() {
-                          search = TextEditingController(text: "");
+                          searchController = TextEditingController(text: "");
+                          search = "";
                         });
                       },
                     )
                   },
                   onSubmitted: (value) {
                     //todo: tìm kiếm sản phẩm theo tên 
+
+                    setState(() {
+                      search = value;
+                    });
                   },
                 ),
               ),
             ),
-            SearchProductList()
-            
+             SearchProductList(search: search),
           ],
         ),
       ),

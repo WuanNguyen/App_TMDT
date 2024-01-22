@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class FirebAuth {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String UID = "";
-
   void signUp(String email, String password, Function onSuccess, Function(String) DangKiloi) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
@@ -62,3 +61,4 @@ class FirebAuth {
   }
 }
 }
+

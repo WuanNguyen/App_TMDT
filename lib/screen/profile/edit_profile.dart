@@ -28,10 +28,10 @@ class _EditProfileState extends State<EditProfile> {
   String newURL ="";
   String linkanh = '';
 
-   final DatabaseReference _databaseReference = FirebaseDatabase(
-    databaseURL:
-        'https://tmdt-bangiay-default-rtdb.asia-southeast1.firebasedatabase.app/',
-  ).ref();
+    final DatabaseReference _databaseReference = FirebaseDatabase(
+      databaseURL:
+          'https://tmdt-bangiay-default-rtdb.asia-southeast1.firebasedatabase.app/',
+    ).ref();
 
     List<Map<dynamic, dynamic>> lst_users = [];
     List<Map<dynamic, dynamic>> infoTitle = [];
@@ -103,7 +103,6 @@ bool isValidPhoneNumber(String input) {
       if(newURL!='')
        url = newURL;
   });
-
     await _databaseReference.child('infomation').child(ID).child(ID).set({
       'fullname': fullname.text,
       'email':email.text,
