@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -33,19 +34,95 @@ class _NotificationScreenState extends State<NotificationScreen> {
   //     date: '01/08/2024',
   //   ),
   // ];
-  final notificationn = FirebaseDatabase.instance.ref('notification');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String getUserUIDString() {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      String userUID = user.uid;
+      return userUID;
+    }
+    return '';
+  }
+
+  final DatabaseReference _databaseReference = FirebaseDatabase(
+    databaseURL: 'https://tmdt-bangiay-default-rtdb.asia-southeast1.firebasedatabase.app/',
+  ).ref();
+
+  List<Map<dynamic, dynamic>> lst_users = [];
+  List<Map<dynamic, dynamic>> infoTitle = [];
+  List<Map<dynamic, dynamic>> ztitle = [];
+
+  Future<void> _loadData() async {
+    try {
+      DatabaseEvent _event = await _databaseReference.once();
+      DataSnapshot? _dataSnapshot = _event.snapshot;
+      if (_dataSnapshot != null && _dataSnapshot.value != null) {
+        Map<dynamic, dynamic> data = (_dataSnapshot.value as Map)['notification'];
+        data.forEach((key, value) {
+          lst_users.add(value);
+        });
+      }
+      String UID = getUserUIDString();
+      for (var element in lst_users) {
+        print("Đây là key: " + element.keys.toString());
+        String UIDS = "($UID)";
+        print("Đây là UID: " + UIDS);
+
+        if (element.keys.toString() == UIDS) {
+          infoTitle.add(element);
+        }
+      }
+      for (var e in infoTitle) {
+        for (var z in e.keys) {
+          ztitle.add(z);
+        }
+      }
+      setState(() {
+        
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+    print(lst_users);
+    print(infoTitle);
+    print(ztitle);
+  }
+
+  String date = '';
+  String imageUrl = '';
+  String desc = '';
+  String title = '';
+  
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xFFD2EDE0),
-        body: Column(
-          children: [
-            Expanded(
-              child: FirebaseAnimatedList(query: notificationn, itemBuilder:(BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
-                Map<dynamic, dynamic> values = snapshot.value as Map<dynamic, dynamic> ;
-                String imageUrl = values['imageUrl'];
-                return Card(
+    return Scaffold(
+      backgroundColor: Color(0xFFD2EDE0),
+      body: FutureBuilder<void>(
+        future: _loadData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done && ztitle.isNotEmpty) {
+            try {
+              String ID = getUserUIDString();
+              date = ztitle[0][ID]['date'];
+              imageUrl = ztitle[0][ID]['imageUrl'];
+              desc = ztitle[0][ID]['desc'];
+              title = ztitle[0][ID]['title'];
+            } catch (e) {
+              print(e.toString());
+            }
+            return Column(
+            children: [
+            SizedBox(height: 15,),
+            ListView(
+              children:[
+                Card(
                   margin: EdgeInsets.all(10),
                   color: Colors.green[200],
                   child: ListTile(
@@ -66,22 +143,27 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       fit: BoxFit.cover,
                       ),
                     ),
-                    title: Text(snapshot.child('title').value.toString(),style: TextStyle(fontWeight: FontWeight.bold)),
+                    title: Text(title,style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(snapshot.child('description').value.toString(),style: TextStyle(fontSize: 15),),
+                        Text(desc,style: TextStyle(fontSize: 15),),
                         SizedBox(height: 8.0),
-                        Text(snapshot.child('date').value.toString(),style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+                        Text(date,style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
                       ],
                     ),
                   ),
-                );
-              } 
-              ),
+                )
+              ] 
             )
           ],
-        )
+        );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
